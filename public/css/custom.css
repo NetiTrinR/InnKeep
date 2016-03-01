@@ -1,0 +1,8 @@
+body{
+    background-color: #000;
+    background: url('/img/pub.jpg') no-repeat center top fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
