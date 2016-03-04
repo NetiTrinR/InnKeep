@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\User;
+use DB;
 use Auth;
+use App\User;
+use App\Character;
 use App\Http\Requests;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class CharacterController extends Controller
@@ -27,7 +29,8 @@ class CharacterController extends Controller
      */
     public function create()
     {
-        //
+        $templates = \DB::table('templates')->select('id', 'name')->get();
+        return view('character.create')->with('templates', $templates);
     }
 
     /**
@@ -42,6 +45,24 @@ class CharacterController extends Controller
     }
 
     /**
+     * Store a newly created character in storage using a template.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function template(Request $request)
+    {
+        $template = DB::table('templates')->find($request->template);
+        $char = new Character([
+            'name' => $request->name,
+            'stats' => $template->json
+        ]);
+        Auth::user()->characters()->save($char);
+
+        return redirect()->route('character.edit', $char);
+    }
+
+    /**
      * Display the specified resource.
      *
      * @param  int  $id
@@ -49,7 +70,8 @@ class CharacterController extends Controller
      */
     public function show($id)
     {
-        //
+        $char = Character::find($id);
+        return view('character.show')->with('character', $char);
     }
 
     /**
@@ -60,7 +82,8 @@ class CharacterController extends Controller
      */
     public function edit($id)
     {
-        //
+        $char = Character::find($id);
+        return view('character.edit')->with('character', $char);
     }
 
     /**

@@ -21,7 +21,7 @@
                             </div>
                         </div>
                         <div class="col-xs-1">
-                            <a href="{{ route('character.create') }}" class="btn btn-success btn-block" title="Create a new character">New <i class="glyphicon glyphicon-plus"></i></a>
+                            <a href="{{ route('character.create') }}" class="btn btn-success btn-block" title="Create a new character"><i class="glyphicon glyphicon-plus"></i></a>
                         </div>
                     </div>
                     <div id="searchlist" class="list-group">

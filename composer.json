@@ -7,7 +7,8 @@
     "require": {
         "php": ">=5.5.9",
         "laravel/framework": "5.2.*",
-        "darrylkuhn/dialect": "1.*"
+        "darrylkuhn/dialect": "1.*",
+        "laravelcollective/html": "5.2.*"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -22,7 +23,10 @@
         ],
         "psr-4": {
             "App\\": "app/"
-        }
+        },
+        "files":[
+            "app/Helpers.php"
+        ]
     },
     "autoload-dev": {
         "classmap": [

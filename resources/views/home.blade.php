@@ -6,22 +6,20 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Ye Olde Journal</div>
                 <div class="panel-body">
-                    @if($announcements->count() > 0)
-                        @foreach($announcements as $announcement)
-                            <blockquote>
-                                {{ $announcement->entry }}
-                                <footer>
-                                    <cite>{{ isset($announcement->character) ? $announcement->character->name : $announcement->user->name }}</cite>, {{ Carbon\Carbon::parse($announcement->created_at)->diffForHumans() }}
-                                </footer>
-                            </blockquote>
-                            <hr />
-                        @endforeach
-                    @else
+                    @forelse($announcements as $announcement)
+                        <blockquote>
+                            {{ $announcement->entry }}
+                            <footer>
+                                <cite>{{ $announcement->character->name or $announcement->user->name }}</cite>, {{ Carbon\Carbon::parse($announcement->created_at)->diffForHumans() }}
+                            </footer>
+                        </blockquote>
+                        <hr />
+                    @empty
                         <p class="text-center">
                             <span class="lead">Ye fiends are away</span><br />
                             <small>(No new entries for the last two weeks)</small>
                         </p>
-                    @endif
+                    @endforelse
                 </div>
             </div>
         </div>
@@ -46,9 +44,9 @@
                 </div>
                 <div class="panel-body">
                     <ul>
+                        <li><a href="{{ route('character.create') }}">Make a new Character</a></li>
                         <li><a href="{{ url('#') }}">Join Campaign (Players)</a></li>
                         <li><a href="{{ url('#') }}">Make a Campaign (DMs)</a></li>
-                        <li><a href="{{ url('#') }}">Make a new Template</a></li>
                     </ul>
                 </div>
             </div>

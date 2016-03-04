@@ -15,4 +15,8 @@ class Book extends Model
     public function tags(){
         return $this->hasMany('App\Tag');
     }
+
+    public function templates(){
+        return DB::table('templates')->where('book_id', $this->id);
+    }
 }

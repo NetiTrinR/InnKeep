@@ -32,6 +32,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::group(['middleware'=>'auth'], function(){
 
         Route::resource('character', 'CharacterController');
+        Route::post('character/template', 'CharacterController@template')->name('character.store.template');
         // Route::resource('campaign', 'characterController');
         Route::get('library', 'LibraryController@index')->name('library.index');
 

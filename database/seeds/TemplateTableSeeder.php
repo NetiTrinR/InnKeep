@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class CharacterTableSeeder extends Seeder
+class TemplateTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,15 +11,15 @@ class CharacterTableSeeder extends Seeder
      */
     public function run()
     {
-        $keehla_template = [
-            'level' =>          2,
-            'strength' =>       8,
-            'dexterity' =>      19,
-            'constitution' =>   14,
-            'intellegence' =>   14,
-            'wisdom' =>         12,
-            'charisma' =>       16,
-            'inspiration' =>    1,
+        $template = [
+            'level' =>         1,
+            'strength' =>       10,
+            'dexterity' =>      10,
+            'constitution' =>   10,
+            'intellegence' =>   10,
+            'wisdom' =>         10,
+            'charisma' =>       10,
+            'inspiration' =>    0,
             'proficiency' =>    2,
             'str' =>    "\${(strength - 10) / 2}",
             'dex' =>    "\${(dexterity - 10) / 2}",
@@ -28,33 +28,33 @@ class CharacterTableSeeder extends Seeder
             'wis' =>    "\${(wisdom - 10) / 2}",
             'cha' =>    "\${(charisma - 10) / 2}",
             'str_save' =>   "\${str}",
-            'dex_save' =>   "\${dex + proficiency}",
+            'dex_save' =>   "\${dex}",
             'con_save' =>   "\${con}",
-            'int_save' =>   "\${int + proficiency}",
+            'int_save' =>   "\${int}",
             'wis_save' =>   "\${wis}",
             'cha_save' =>   "\${cha}",
-            'acrobatics' =>         "\${dex + proficiency}",
+            'acrobatics' =>         "\${dex}",
             'animal_handling' =>    "\${wis}",
             'arcana' =>             "\${int}",
             'athletics' =>          "\${str}",
-            'deception' =>          "\${cha + proficiency}",
+            'deception' =>          "\${cha}",
             'history' =>            "\${int}",
             'insight' =>            "\${wis}",
             'intimidation' =>       "\${cha}",
             'investigation' =>      "\${int}",
             'medicine' =>           "\${wis}",
             'nature' =>             "\${int}",
-            'perception' =>         "\${wis + proficiency}",
-            'performance' =>        "\${cha + proficiency}",
-            'persuasion' =>         "\${cha + proficiency}",
+            'perception' =>         "\${wis}",
+            'performance' =>        "\${cha}",
+            'persuasion' =>         "\${cha}",
             'religion' =>           "\${int}",
-            'slight_of_hand' =>     "\${dex + proficiency}",
-            'stealth' =>             "\${dex + proficiency}",
+            'slight_of_hand' =>     "\${dex}",
+            'stealth' =>             "\${dex}",
             'survival' =>           "\${wis}",
             'passive_wisdom' =>     "\${wis}",
             'hit_die' =>    '1d8',
             'hit_points' => '8',
-            'initiative' => "\${dex}`",
+            'initiative' => "\${dex}",
             'speed' =>  '30',
             'proficiencies' => [],
             'features' => [],
@@ -77,11 +77,11 @@ class CharacterTableSeeder extends Seeder
             'gp' => 0,
             'pp' => 0
         ];
-        DB::table('characters')->truncate();
-        $char = new App\Character(['name'=>'Keehla']);
-        $char->stats = json_encode($keehla_template);
-        App\User::find(1)->characters()->save($char);
-        App\Campaign::find(1)->characters()->save($char);
-        $char->save();
+        DB::table('templates')->truncate();
+        DB::table('templates')->insert([
+            'name' => 'Generic D&D 5e Character',
+            'book_id' => App\Book::where('name', 'Players Handbook')->where('version', '5th Edition')->value('id'),
+            'json' => json_encode($template)
+        ]);
     }
 }

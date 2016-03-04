@@ -10,7 +10,7 @@ class Character extends Model
     use Json;
     protected $jsonColumns = ['stats'];
 
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'stats'];
 
     public function user(){
         return $this->belongsTo(User::class);
