@@ -16,6 +16,7 @@ class CreateCharacterItemTable extends Migration
             $table->integer('character_id')->unsigned();
             $table->integer('item_id')->unsigned();
             $table->integer('quantity')->default(1);
+            $table->string('units')->nullable();
             $table->index(['character_id', 'item_id']);
             $table->timestamps();
         });
