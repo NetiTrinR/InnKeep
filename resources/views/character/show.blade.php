@@ -66,14 +66,14 @@
             <div class="panel panel-default">
                 <div class="panel-body">
                     <ul class="nav nav-tabs" style="margin-bottom: 10px;">
-                        <li class="active"><a href="#view" data-toggle="tab">View</a></li>
-                        <li><a href="#inventory" data-toggle="tab">Inventory</a></li>
+                        <li><a href="#view" data-toggle="tab">View</a></li>
+                        <li class="active"><a href="#inventory" data-toggle="tab">Inventory</a></li>
                         <li><a href="#journal" data-toggle="tab">Journal</a></li>
                         <li><a href="#debug" data-toggle="tab">Debug</a></li>
                         <li class="pull-right"><a href="">Edit</a></li>
                     </ul>
                     <div class="tab-content">
-                        <div id="view" class="tab-pane active">
+                        <div id="view" class="tab-pane ">
                             <div class="row" style="margin-bottom: 10px;">
                                 <div class="col-md-5">
                                     <h2 class="stat_field"><small>Name:</small> {{ $character->name }}</h2>
@@ -91,11 +91,14 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-xs-6">
+                                        <div class="col-xs-4">
                                             <div class="stat_field"><small>Race:</small> <span v-text="calc.race"></span></div>
                                         </div>
-                                        <div class="col-xs-6">
+                                        <div class="col-xs-4">
                                             <div class="stat_field"><small>Alignment:</small> <span v-text="calc.alignment"></span></div>
+                                        </div>
+                                        <div class="col-xs-4">
+                                            <div class="stat_field"><small>Experience:</small> <span v-text="calc.experience"></span></div>
                                         </div>
                                     </div>
                                 </div>
@@ -152,11 +155,15 @@
                                                 <h3 class="panel-title">Inspiration</h3>
                                             </div>
                                             <div class="panel-body">
-                                                <span v-text="stats.inspiration"></span>
-                                                <div class="pull-right clearfix">
-                                                    <div class="btn-group">
-                                                        <button type="button" class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-minus"></i></button>
-                                                        <button type="button" class="btn btn-success btn-sm"><i class="glyphicon glyphicon-plus"></i></button>
+                                                <!-- Inspiration Form Input -->
+                                                <div class="form-group">
+                                                    <!-- <label for="inspiration" class="control-label">Inspiration</label> -->
+                                                    <div class="input-group input-group-sm">
+                                                        <input type="text" name="inspiration" class="form-control" v-model="stats.inspiration" />
+                                                        <div class="input-group-btn">
+                                                            <button type="button" class="btn btn-danger"><i class="glyphicon glyphicon-minus"></i></button>
+                                                            <button type="button" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i></button>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -385,6 +392,20 @@
                                             <div class="form-group">
                                                 <input type="text" name="weapon" class="form-control input-sm" placeholder="Search"/>
                                             </div>
+                                            <div class="list-group">
+                                                @if($weapons->count() > 0)
+                                                        @foreach($weapons as $key => $item)
+                                                            <div class="list-group-item">
+                                                                <h3 class="list-group-item-heading">{{ $item->name }}</h3>
+                                                                <p>{{ $item->description }}</p>
+                                                            </div>
+                                                        @endforeach
+                                                @else
+                                                    <div class="list-group-item">
+                                                        No Weapons to display.
+                                                    </div>
+                                                @endif
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -398,39 +419,75 @@
                                             <div class="form-group">
                                                 <input type="text" name="item" class="form-control input-sm" placeholder="Search"/>
                                             </div>
+                                            <div class="list-group">
+                                                @if($stdItems->count() > 0)
+                                                    @foreach($stdItems as $key => $item)
+                                                        <div class="list-group-item">
+                                                            {{ $item->name }}
+                                                            <small class="pull-right">{{ $item->pivot->quantity }}{{ ' ' + $item->pivot->unit or ''}}</small>
+                                                        </div>
+                                                    @endforeach
+                                                @else
+                                                    <div class="list-group-item">
+                                                        No Items to display.
+                                                    </div>
+                                                @endif
+                                            </div>
+                                        </div>
+                                        <div class="panel-footer text-center">
+                                            cp: <span v-text="stats.cp"></span> |
+                                            sp: <span v-text="stats.sp"></span> |
+                                            ep: <span v-text="stats.ep"></span> |
+                                            gp: <span v-text="stats.gp"></span> |
+                                            pp: <span v-text="stats.pp"></span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div id="inventory" class="tab-pane">
+                        <div id="inventory" class="tab-pane active">
                             <div class="row">
                                 <div class="col-md-2">
                                     <!-- Cp Form Input -->
                                     <div class="form-group">
-                                        <label for="cp" class="control-label">CP</label>
-                                        <input type="text" name="cp" class="form-control" v-model="stats.cp" />
+                                        <div class="input-group">
+                                            <input type="text" name="cp" class="form-control" v-model="stats.cp" />
+                                            <div class="input-group-addon">CP</div>
+                                        </div>
                                     </div>
                                     <!-- Sp Form Input -->
                                     <div class="form-group">
-                                        <label for="sp" class="control-label">SP</label>
-                                        <input type="text" name="sp" class="form-control" v-model="stats.sp" />
+                                        <div class="input-group">
+                                            <input type="text" name="sp" class="form-control" v-model="stats.sp" />
+                                            <div class="input-group-addon">SP</div>
+                                        </div>
                                     </div>
                                     <!-- Ep Form Input -->
                                     <div class="form-group">
-                                        <label for="ep" class="control-label">EP</label>
-                                        <input type="text" name="ep" class="form-control" v-model="stats.ep" />
+                                        <div class="input-group">
+                                            <input type="text" name="ep" class="form-control" v-model="stats.ep" />
+                                            <div class="input-group-addon">EP</div>
+                                        </div>
                                     </div>
                                     <!-- Gp Form Input -->
                                     <div class="form-group">
-                                        <label for="gp" class="control-label">GP</label>
-                                        <input type="text" name="gp" class="form-control" v-model="stats.gp" />
+                                        <div class="input-group">
+                                            <input type="text" name="gp" class="form-control" v-model="stats.gp" />
+                                            <div class="input-group-addon">GP</div>
+                                        </div>
                                     </div>
                                     <!-- Pp Form Input -->
                                     <div class="form-group">
-                                        <label for="pp" class="control-label">PP</label>
-                                        <input type="text" name="pp" class="form-control" v-model="stats.pp" />
+                                        <div class="input-group">
+                                            <input type="text" name="pp" class="form-control" v-model="stats.pp" />
+                                            <div class="input-group-addon">PP</div>
+                                        </div>
                                     </div>
+                                </div>
+                                <div class="col-md-10">
+                                    @foreach($character->items as $key => $item)
+                                        @include('partials._item', $item)
+                                    @endforeach
                                 </div>
                             </div>
                         </div>
@@ -438,7 +495,7 @@
                             Journal
                         </div>
                         <div id="debug" class="tab-pane">
-                            <pre>{{ print_r($character->items->toArray()) }}</pre>
+                            <pre>{{ print_r($character->items) }}</pre>
                             <pre>@{{ $data | json }}</pre>
                         </div>
                     </div>
