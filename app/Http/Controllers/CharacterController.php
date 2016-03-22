@@ -6,6 +6,7 @@ use DB;
 use Auth;
 use App\User;
 use App\Character;
+use App\Tag;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -70,8 +71,15 @@ class CharacterController extends Controller
      */
     public function show($id)
     {
-        $char = Character::find($id);
-        return view('character.show')->with('character', $char);
+        $character = Character::with('items.tags')->find($id);
+        $weaponId = Tag::where('name', 'Weapon')->first()->id;
+        $weapons = $character->items()->whereHas('tags', function($query) use($weaponId){
+            return $query->where("tags.id", $weaponId);
+        })->get();
+        $stdItems = $character->items()->whereHas('tags', function($query) use($weaponId){
+            return $query->where("tags.id", "<>", $weaponId);
+        })->get();
+        return view('character.show', compact('character', 'weapons', 'stdItems'));
     }
 
     /**
@@ -82,8 +90,8 @@ class CharacterController extends Controller
      */
     public function edit($id)
     {
-        $char = Character::find($id);
-        return view('character.edit')->with('character', $char);
+        $character = Character::find($id);
+        return view('character.edit')->with('character', $character);
     }
 
     /**
