@@ -22,7 +22,7 @@
                 <ul class="nav navbar-nav">
                     <li><a href="{{ route('home') }}">Home</a></li>
                     <li><a href="{{ route('character.index') }}">Adventurers</a></li>
-                    <li><a href="{{ route('library.index') }}">Tomes</a></li>
+                    <li><a href="{{ route('library.index') }}">Library</a></li>
                 </ul>
             @endif
 
