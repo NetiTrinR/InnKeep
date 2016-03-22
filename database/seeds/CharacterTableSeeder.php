@@ -61,7 +61,7 @@ class CharacterTableSeeder extends Seeder
             'initiative' => "\${dex}",
             'speed' =>  30,
             'proficiencies' => "Features & Traits:\nExpertise\nSneak Attack\nThieves Cant\nDark Vision\nSoft Fall\nFeline Grace\nClaws\nCunning Action\n\nOther:\nLight Armor\nSimple Weapons\nHand Crossbow\nLong Swords\nRapier\nShort Sword\nThieves Tools\nDisguise Kit\nForgery Kit",
-            'class' => 'Rouge',
+            'class' => 'Rogue',
             'background' => "Charlatan",
             'race' =>   "Catfolk",
             'alignment' => "Chaotic Netural",
