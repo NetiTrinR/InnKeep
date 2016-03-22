@@ -9,10 +9,10 @@ class Item extends Model
     protected $fillable = ['name', 'description', 'page', 'book_id'];
 
     public function characters(){
-        return $this->belongsToMany('App\Character')->withPivot('quantity')->withTimestamps();
+        return $this->belongsToMany('App\Character')->withPivot('quantity', 'units')->withTimestamps();
     }
 
     public function tags(){
-        return $this->belongsToMany('App\Tags');
+        return $this->belongsToMany('App\Tag');
     }
 }
