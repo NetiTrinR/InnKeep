@@ -26,16 +26,27 @@ Route::group(['middleware' => 'web'], function () {
     Route::auth();
 
     Route::get('test', function(){
-        return view('test');
+        return view('test')->with('character', App\Character::find(1));
     });
+
     Route::get('/welcome', 'HomeController@welcome')->name('home.welcome');
+
+    // Login required
     Route::group(['middleware'=>'auth'], function(){
 
+        //Character
         Route::resource('character', 'CharacterController');
         Route::post('character/template', 'CharacterController@template')->name('character.store.template');
-        // Route::resource('campaign', 'characterController');
-        Route::get('library', 'LibraryController@index')->name('library.index');
 
+        // Library
+        Route::group(['prefix'=>'library'], function(){
+            Route::resource('item', 'ItemController');
+            Route::resource('tag', 'TagController');
+            Route::resource('book', 'BookController');
+            Route::get('/', 'LibraryController@index')->name('library.index');
+        });
+
+        // Home
         Route::get('/', 'HomeController@index')->name('home');
     });
 });
