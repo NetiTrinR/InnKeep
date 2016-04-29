@@ -19,7 +19,7 @@
     }
     .custom-rc label {
         display: inline-block;
-        /*cursor: pointer;*/
+        cursor: pointer;
         position: relative;
         padding-right: 25px;
         margin-right:15px;
@@ -66,14 +66,14 @@
             <div class="panel panel-default">
                 <div class="panel-body">
                     <ul class="nav nav-tabs" style="margin-bottom: 10px;">
-                        <li><a href="#view" data-toggle="tab">View</a></li>
-                        <li class="active"><a href="#inventory" data-toggle="tab">Inventory</a></li>
+                        <li class="active"><a href="#view" data-toggle="tab">View</a></li>
+                        <li><a href="#inventory" data-toggle="tab">Inventory</a></li>
                         <li><a href="#journal" data-toggle="tab">Journal</a></li>
                         <li><a href="#debug" data-toggle="tab">Debug</a></li>
                         <li class="pull-right"><a href="">Edit</a></li>
                     </ul>
                     <div class="tab-content">
-                        <div id="view" class="tab-pane ">
+                        <div id="view" class="tab-pane active">
                             <div class="row" style="margin-bottom: 10px;">
                                 <div class="col-md-5">
                                     <h2 class="stat_field"><small>Name:</small> {{ $character->name }}</h2>
@@ -445,7 +445,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div id="inventory" class="tab-pane active">
+                        <div id="inventory" class="tab-pane">
                             <div class="row">
                                 <div class="col-md-2">
                                     <!-- Cp Form Input -->

@@ -13,5 +13,6 @@ class TagTableSeeder extends Seeder
     {
         DB::table('tags')->truncate();
         App\Book::find(1)->tags()->save(new App\Tag(['name' => 'Magic Items']));
+        App\Book::find(1)->tags()->save(new App\Tag(['name' => 'Weapon']));
     }
 }
