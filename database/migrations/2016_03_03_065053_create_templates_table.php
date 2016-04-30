@@ -15,7 +15,8 @@ class CreateTemplatesTable extends Migration
         Schema::create('templates', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->json('json');
+            $table->text('json');
+            // $table->json('json');
             $table->integer('book_id')->unsigned()->nullable();
             $table->timestamps();
         });

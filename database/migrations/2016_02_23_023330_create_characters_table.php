@@ -17,7 +17,8 @@ class CreateCharactersTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->integer('template_id')->unsigned()->nullable();
             $table->string('name');
-            $table->json('stats');
+            $table->text('stats');
+            // $table->json('stats');
             $table->timestamps();
         });
     }
