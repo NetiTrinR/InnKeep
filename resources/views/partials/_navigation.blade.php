@@ -23,6 +23,7 @@
                     <li><a href="{{ route('home') }}">Home</a></li>
                     <li><a href="{{ route('character.index') }}">Adventurers</a></li>
                     <li><a href="{{ route('library.index') }}">Library</a></li>
+                    <li><a href="@{{ route('campaign.index') }}">Campaigns</a></li>
                 </ul>
             @endif
 

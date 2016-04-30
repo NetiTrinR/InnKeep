@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Not again...</title>
+        <title>It's not you</title>
 
         <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
 
@@ -40,7 +40,7 @@
     <body>
         <div class="container">
             <div class="content">
-                <div class="title">The bunnies got out again.<br />Be right back.</div>
+                <div class="title">Ah.. 404<br />Looks like the bunnies stole this page.</div>
             </div>
         </div>
     </body>

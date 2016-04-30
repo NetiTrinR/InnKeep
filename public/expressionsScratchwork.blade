@@ -1,0 +1,122 @@
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+<script type="text/javascript">
+    var expressions = '*[data-toggle=expression]';
+    var proficiencies = '*[data-toggle=proficiency]';
+    var checkProficiency = function(expression){
+        return (expression.indexOf('proficiency') > -1);
+    }
+    var floor = Math.floor;
+    var ceil = Math.ceil;
+    var evalExpression = function(expression){
+        if(typeof expression !== "string"){
+            console.warn("Tried to parse a string on show.blade.php:444\nexpression:",expression);
+            return expression;
+        }
+
+        expression = expression.replace('\$\{', '');
+        expression = expression.replace('\}', '');
+        return eval(expression);
+    };
+    var showExpression = function(input){
+        $(input).val($(input).data('value'));
+    };
+    var hideExpression = function(input){
+        getScope();
+        $(input).text(evalExpression($(input).data('value')));
+    };
+    function getScope(){
+        var scope = {!! $character->stats !!};
+        $('input').each(function(){
+            var val = $(this).val();
+            if(_.isNumber(parseInt(val)))
+                val = parseInt(val);
+            else
+                val = evalExpression(val);
+            scope[$(this).attr('name')] = val;
+        });
+        extract(scope);
+    }
+    function extract(variable) {
+        for (var key in variable) {
+            window[key] = variable[key];
+        }
+    }
+    $(document).ready(function(){
+        $(document).on('click', '.custom-rc label', function(){
+            var target = $(this).prop('for');
+            console.log(target);
+            var input = $("input[name="+target+"]");
+            input.prop('checked', !input.prop('checked'));
+        });
+        console.log(proficiencies);
+        $(proficiencies).each(function(){
+            // console.log($(this).prop('name'), $(this).data('value'), checkProficiency($(this).data('value')));
+            if(checkProficiency($(this).data('value'))){
+                $(this).prop('checked', true);
+            }
+        });
+        $(expressions).each(function(){
+            hideExpression(this);
+        });
+        // $('*[data-toggle=match-w').each(function(){
+        //     $(this).height($(this).width());
+        //     var main = $(this).find('.main');
+        //     main.css({top: ($(this).height() / 2) - (main.height() / 2)});
+        // });
+        // $(document).on('focus', expressions, function(){
+        //     showExpression(this);
+        // });
+        // $(document).on('blur', expressions, function(){
+        //     hideExpression(this);
+        // });
+        // $(document).on('blur', 'input:not('+expressions+')', function(){
+        //     $(expressions).each(function(){
+        //         hideExpression(this);
+        //     });
+        // });
+    });
+</script>
+<script type="text/javascript">
+    var expressions = '*[data-toggle=expression]';
+    var evalExpression = function(expression){
+        return eval(/\$\{(.+)\}/g.exec(expression)[1]);
+    };
+    var showExpression = function(input){
+        $(input).val($(input).data('value'));
+    };
+    var hideExpression = function(input){
+        getScope();
+        $(input).val(evalExpression($(input).data('value')));
+    };
+    function getScope(){
+        var scope = {};
+        $('input').each(function(){
+            var val = $(this).val();
+            if(_.isNumber(parseInt(val)))
+                val = parseInt(val);
+            scope[$(this).attr('name')] = val;
+        });
+        extract(scope);
+    }
+    function extract(variable) {
+        for (var key in variable) {
+            window[key] = variable[key];
+        }
+    }
+    $(document).ready(function(){
+        $(expressions).each(function(){
+            hideExpression(this);
+        });
+        $(document).on('focus', expressions, function(){
+            showExpression(this);
+        });
+        $(document).on('blur', expressions, function(){
+            hideExpression(this);
+        });
+        $(document).on('blur', 'input:not('+expressions+')', function(){
+            $(expressions).each(function(){
+                hideExpression(this);
+            });
+        });
+    });
+</script>

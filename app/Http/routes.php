@@ -40,6 +40,7 @@ Route::group(['middleware' => 'web'], function () {
 
         // Library
         Route::group(['prefix'=>'library'], function(){
+            Route::resource('journal', 'JournalController');
             Route::resource('item', 'ItemController');
             Route::resource('tag', 'TagController');
             Route::resource('book', 'BookController');
