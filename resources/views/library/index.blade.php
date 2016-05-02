@@ -23,8 +23,8 @@
                                 You know, the usual.
                             </p>
                             <ul>
-                                <li><a href="@{{ route('library.journal.index') }}">Read Journal</a></li>
-                                <li><a href="@{{ route('library.journal.create') }}">New Entry</a></li>
+                                <li><a href="@{{ route('library.journal.index') }}">Read Yo Journal</a></li>
+                                <li><a href="@{{ route('library.journal.create') }}">Write Yo Journal</a></li>
                             </ul>
                         </div>
                     </div>
@@ -43,7 +43,7 @@
                             </p>
                             <ul>
                                 <li><a href="@{{ route('library.item.index') }}">All the things</a></li>
-                                <li><a href="@{{ route('library.item.create') }}">Make a new thing</a></li>
+                                <li><a href="@{{ route('library.item.create') }}">Make a thing</a></li>
                             </ul>
                         </div>
                     </div>
@@ -58,8 +58,8 @@
                                 Tags keep things in order and searchable. If you make a new inventory item and you don't tag it, good luck finding it else where. <small>The web bunnies like to take untagged items and forever obscure them in the database.</small>
                             </p>
                             <ul>
-                                <li><a href="@{{ route('library.tag.index') }}">View</a></li>
-                                <li><a href="@{{ route('library.tag.create') }}">Create</a></li>
+                                <li><a href="@{{ route('library.tag.index') }}">All the tags</a></li>
+                                <li><a href="@{{ route('library.tag.create') }}">New a tag</a></li>
                             </ul>
                         </div>
                     </div>
