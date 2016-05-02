@@ -21,13 +21,6 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
     ];
 });
 
-$factory->define(App\Book::class, function (Faker\Generator $faker) {
-    return [
-        'name' => $faker->company,
-        'version' => 'e' . rand(1, 20)
-    ];
-});
-
 $factory->define(App\Campaign::class, function(Faker\Generator $faker) {
     return [
         'name' => $faker->company

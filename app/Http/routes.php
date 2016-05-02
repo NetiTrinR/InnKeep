@@ -43,7 +43,6 @@ Route::group(['middleware' => 'web'], function () {
             Route::resource('journal', 'JournalController');
             Route::resource('item', 'ItemController');
             Route::resource('tag', 'TagController');
-            Route::resource('book', 'BookController');
             Route::get('/', 'LibraryController@index')->name('library.index');
         });
 

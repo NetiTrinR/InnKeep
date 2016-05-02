@@ -12,7 +12,11 @@ class TagTableSeeder extends Seeder
     public function run()
     {
         DB::table('tags')->truncate();
-        App\Book::find(1)->tags()->save(new App\Tag(['name' => 'Magic Items']));
-        App\Book::find(1)->tags()->save(new App\Tag(['name' => 'Weapon']));
+        DB::table('tags')->insert([
+            ['name' => 'D&D 5e'],
+            ['name' => 'Players Handbook'],
+            ['name' => 'Magic Item'],
+            ['name' => 'Weapon']
+        ]);
     }
 }

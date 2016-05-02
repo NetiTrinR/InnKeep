@@ -31,23 +31,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-4">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">Tomes <small>Books</small></h3>
-                        </div>
-                        <div class="panel-body">
-                            <p>
-                                Tomes are the all powerful top level mojo hoopla. Think of Tomes as your books. Pathfinders, D&amp;D 5e, D&amp;D 3.5e are all different tomes. There is a reason after all that wizards covet them.
-                            </p>
-                            <ul>
-                                <li><a href="@{{ route('library.book.index') }}">Read a book</a></li>
-                                <li><a href="@{{ route('library.book.create') }}">Add a new Tome</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h3 class="panel-title">Inventory</h3>
@@ -64,7 +48,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h3 class="panel-title">Tags</h3>

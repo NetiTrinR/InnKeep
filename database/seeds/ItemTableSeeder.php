@@ -12,6 +12,6 @@ class ItemTableSeeder extends Seeder
     public function run()
     {
         DB::table('items')->truncate();
-        App\Tag::find(1)->items()->save(new App\Item(['name'=>'Bag of Holding']));
+        App\Tag::find(3)->items()->save(new App\Item(['name'=>'Bag of Holding']));
     }
 }

@@ -13,6 +13,6 @@ class CampaignTableSeeder extends Seeder
     {
         DB::table('campaigns')->truncate();
         App\User::find(1)->mCampaigns()->create(['name'=>'First Campaign']);
-        App\Book::find(1)->campaigns()->save(App\Campaign::find(1));
+        App\Campaign::find(1)->tags()->save(App\Tag::find(1));
     }
 }

@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateBooksTable extends Migration
+class CreateCampaignTagTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,11 +12,10 @@ class CreateBooksTable extends Migration
      */
     public function up()
     {
-        Schema::create('books', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name');
-            $table->string('version');
-            $table->timestamps();
+        Schema::create('campaign_tag', function(Blueprint $table){
+            $table->integer('campaign_id')->unsigned();
+            $table->integer('tag_id')->unsigned();
+            $table->index(['campaign_id', 'tag_id']);
         });
     }
 
@@ -27,6 +26,6 @@ class CreateBooksTable extends Migration
      */
     public function down()
     {
-        Schema::drop('books');
+        Schema::drop('campaign_tag');
     }
 }

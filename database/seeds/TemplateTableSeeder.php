@@ -84,7 +84,7 @@ class TemplateTableSeeder extends Seeder
         DB::table('templates')->truncate();
         DB::table('templates')->insert([
             'name' => 'Generic D&D 5e Character',
-            'book_id' => App\Book::where('name', 'Players Handbook')->where('version', '5th Edition')->value('id'),
+            'tag_id' => App\Tag::find(1)->value('id'),
             'json' => json_encode($template)
         ]);
     }

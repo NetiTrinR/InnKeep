@@ -12,8 +12,8 @@ class Campaign extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function books(){
-        return $this->belongsToMany(Book::class);
+    public function tags(){
+        return $this->belongsToMany(Tag::class);
     }
 
     public function characters(){

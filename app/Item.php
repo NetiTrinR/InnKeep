@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Item extends Model
 {
-    protected $fillable = ['name', 'description', 'page', 'book_id'];
+    protected $fillable = ['name', 'description', 'page'];
 
     public function characters(){
         return $this->belongsToMany('App\Character')->withPivot('quantity', 'units')->withTimestamps();

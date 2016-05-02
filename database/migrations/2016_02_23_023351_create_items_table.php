@@ -17,7 +17,6 @@ class CreateItemsTable extends Migration
             $table->string('name');
             $table->string('description')->nullable();
             $table->integer('page')->nullable();
-            $table->integer('book_id')->nullable();
             $table->timestamps();
         });
     }
