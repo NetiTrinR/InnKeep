@@ -83,9 +83,9 @@ class TemplateTableSeeder extends Seeder
         ];
         DB::table('templates')->truncate();
         DB::table('templates')->insert([
-            'name' => 'Generic D&D 5e Character',
-            'tag_id' => App\Tag::find(1)->value('id'),
-            'json' => json_encode($template)
+            'name' => 'D&D 5e Character',
+            'json' => json_encode($template),
+            'blade' => 'default5e' // Sudo Random value
         ]);
     }
 }
