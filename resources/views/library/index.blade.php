@@ -23,7 +23,7 @@
                                 You know, the usual.
                             </p>
                             <ul>
-                                <li><a href="@{{ route('library.journal.index') }}">Read Yo Journal</a></li>
+                                <li><a href="{{ route('library.journal.index') }}">Read Yo Journal</a></li>
                                 <li><a href="@{{ route('library.journal.create') }}">Write Yo Journal</a></li>
                             </ul>
                         </div>
