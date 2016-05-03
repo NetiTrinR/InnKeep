@@ -17,7 +17,7 @@ class CreateTemplatesTable extends Migration
             $table->string('name');
             $table->text('json');
             // $table->json('json');
-            $table->integer('tag_id')->unsigned()->nullable();
+            $table->string('blade')->nulllable();
             $table->timestamps();
         });
     }
