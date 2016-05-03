@@ -27,4 +27,31 @@ class Character extends Model
     public function journals(){
         return $this->hasMany(Journal::class);
     }
+
+    public function template(){
+        return $this->belongsTo(Template::class);
+    }
+
+    public function viewable(){
+        if(\Auth::user()->id != $this->user->id && !$this->viewable){
+            throw (new Exceptions\CharacterNotViewable);
+        }
+        return $this;
+    }
+
+    public function getWeaponsAttribute(){
+        return $this->items()->weapon()->get();
+    }
+
+    public function getNotWeaponsAttribute(){
+        return $this->items()->notWeapon()->get();
+    }
+
+    public function getViewableAttribute(){
+        return isset($this->user->charactersViewable)? $this->user->charactersViewable : true;
+    }
+
+    public function getInventoryViewableAttribute(){
+        return isset($this->user->charactersInventoryViewable)? $this->user->charactersInventoryViewable : false;
+    }
 }

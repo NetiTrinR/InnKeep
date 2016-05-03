@@ -71,15 +71,8 @@ class CharacterController extends Controller
      */
     public function show($id)
     {
-        $character = Character::with('items.tags')->find($id);
-        $weaponId = Tag::where('name', 'Weapon')->first()->id;
-        $weapons = $character->items()->whereHas('tags', function($query) use($weaponId){
-            return $query->where("tags.id", $weaponId);
-        })->get();
-        $stdItems = $character->items()->whereHas('tags', function($query) use($weaponId){
-            return $query->where("tags.id", "<>", $weaponId);
-        })->get();
-        return view('character.show', compact('character', 'weapons', 'stdItems'));
+        $character = Character::findOrFail($id)->viewable();
+        return view('character.show', compact('character'));
     }
 
     /**

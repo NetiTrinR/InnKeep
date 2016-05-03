@@ -9,10 +9,22 @@ class Item extends Model
     protected $fillable = ['name', 'description', 'page'];
 
     public function characters(){
-        return $this->belongsToMany('App\Character')->withPivot('quantity', 'units')->withTimestamps();
+        return $this->belongsToMany(Character::class)->withPivot('quantity', 'units')->withTimestamps();
     }
 
     public function tags(){
-        return $this->belongsToMany('App\Tag');
+        return $this->belongsToMany(Tag::class);
+    }
+
+    public function scopeWeapon($query){
+        return $query->whereHas('tags', function($query) {
+            return $query->where("tags.id", Tag::where('name', 'Weapon')->first()->id);
+        });
+    }
+
+    public function scopeNotWeapon($query){
+        return $query->whereDoesntHave('tags', function($query) {
+            return $query->where("tags.id", Tag::where('name', 'Weapon')->first()->id);
+        });
     }
 }

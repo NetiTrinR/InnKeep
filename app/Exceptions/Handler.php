@@ -21,6 +21,7 @@ class Handler extends ExceptionHandler
         HttpException::class,
         ModelNotFoundException::class,
         ValidationException::class,
+        CharacterNotViewable::class,
     ];
 
     /**
@@ -45,6 +46,15 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $e)
     {
+
+        if($e instanceof CharacterNotViewable){
+            \Session::flash('warning', "Character could not be retreived. Maybe the web bunnies are hiding it.");
+            return back();
+        }
+        if($e instanceof ModelNotFoundException){
+            dd($e);
+        }
+
         return parent::render($request, $e);
     }
 }

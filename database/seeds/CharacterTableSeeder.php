@@ -82,10 +82,15 @@ class CharacterTableSeeder extends Seeder
             'pp' => 1
         ];
         DB::table('characters')->truncate();
+        DB::table('character_item')->truncate();
+
         $char = new App\Character(['name'=>'Keehla']);
         $char->stats = json_encode($keehla_template);
         App\User::find(1)->characters()->save($char);
         App\Campaign::find(1)->characters()->save($char);
+        App\Template::find(1)->characters()->save($char);
+        App\Item::find(1)->characters()->save($char);
+        App\Item::find(2)->characters()->save($char);
         $char->save();
     }
 }
