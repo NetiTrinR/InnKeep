@@ -26,7 +26,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::auth();
 
     Route::get('test', function(){
-        return view('test')->with('character', App\Character::find(1));
+        dd(App\User::all());
     });
 
     Route::get('/welcome', 'HomeController@welcome')->name('home.welcome');

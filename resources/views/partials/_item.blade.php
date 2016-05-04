@@ -12,7 +12,7 @@
                     <label for="description" class="control-label">Description</label>
                     <p class="form-control-static">{{ $item->description }}</p>
                 </div>
-                @endif
+            @endif
             <div class="row">
                 <div class="col-sm-6">
                     <!-- Quantity Form Input -->

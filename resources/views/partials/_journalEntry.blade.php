@@ -1,7 +1,7 @@
 <blockquote>
-    {{ $announcement->entry }}
+    {{ $entry->entry }}
     <footer>
-        <cite>{{ $announcement->character->name or $announcement->user->name }}</cite>, {{ Carbon\Carbon::parse($announcement->created_at)->diffForHumans() }}
+        <cite>{{ $entry->character->name or $entry->user->name }}</cite>, {{ Carbon\Carbon::parse($entry->created_at)->diffForHumans() }}
     </footer>
 </blockquote>
 <hr />

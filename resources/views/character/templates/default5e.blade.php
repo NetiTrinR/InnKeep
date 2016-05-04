@@ -408,7 +408,7 @@
             </div>
         </div>
         <div class="col-md-10">
-            @include('partials._item', $items, 'item')
+            @include('partials._item', $character->items, 'item')
         </div>
     </div>
 @endpush

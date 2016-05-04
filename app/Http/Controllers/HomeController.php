@@ -18,10 +18,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $announcements = Journal::with('character')
-            ->orderBy('created_at', 'ASC')
-            ->whereIn('campaign_id', Auth::user()->campaigns()->pluck('id'))
-            ->where('created_at', '>=', \Carbon\Carbon::now()->subWeek(2)->startOfDay())
+        // dd(Journal::campaigns()->viewable()->get());
+        $announcements = Journal::campaigns()->viewable()
+            ->where('journals.created_at', '>=', \Carbon\Carbon::now()->subWeek(2)->startOfDay()) // Needs to have the journals otherwise it conflicts with the viewable join
             ->get();
         return view('home', compact('announcements'));
     }

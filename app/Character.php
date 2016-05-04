@@ -33,7 +33,7 @@ class Character extends Model
     }
 
     public function viewable(){
-        if(\Auth::user()->id != $this->user->id && !$this->viewable){
+        if(\Auth::user()->id != $this->user->id && !$this->user->characterViewable){
             throw (new Exceptions\CharacterNotViewable);
         }
         return $this;
@@ -47,11 +47,4 @@ class Character extends Model
         return $this->items()->notWeapon()->get();
     }
 
-    public function getViewableAttribute(){
-        return isset($this->user->charactersViewable)? $this->user->charactersViewable : true;
-    }
-
-    public function getInventoryViewableAttribute(){
-        return isset($this->user->charactersInventoryViewable)? $this->user->charactersInventoryViewable : false;
-    }
 }

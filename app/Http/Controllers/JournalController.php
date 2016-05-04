@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
+use App\Journal;
 use App\Http\Requests;
+use Illuminate\Http\Request;
 
 class JournalController extends Controller
 {
@@ -15,7 +15,7 @@ class JournalController extends Controller
      */
     public function index()
     {
-        return view('library.journal.index');
+        return view('library.journal.index')->with('entries', Journal::campaigns()->viewable()->simplePaginate(10));
     }
 
     /**

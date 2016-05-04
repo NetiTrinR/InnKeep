@@ -12,7 +12,7 @@ class CampaignTableSeeder extends Seeder
     public function run()
     {
         DB::table('campaigns')->truncate();
-        App\User::find(1)->mCampaigns()->create(['name'=>'First Campaign']);
+        App\User::find(1)->dmCampaigns()->create(['name'=>'First Campaign']);
         App\Campaign::find(1)->tags()->save(App\Tag::find(1));
     }
 }

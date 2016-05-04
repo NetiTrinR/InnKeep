@@ -18,6 +18,7 @@ class CreateJournalsTable extends Migration
             $table->integer('character_id')->unsigned()->nullable();
             $table->text('entry');
             $table->integer('user_id')->unsigned();
+            $table->boolean('viewable')->default(true);
             $table->timestamps();
         });
     }

@@ -15,11 +15,12 @@ class UsersTableSeeder extends Seeder
         App\User::create([
             'name' => 'Michael',
             'email' => 'netitrinr@gmail.com',
-            'phone' => '1231234567',
+            'phone' => '1234156789',
             'password' => Hash::make('123456'),
             'options' => json_encode([
-                'charactersViewable' => true,
-                'charactersInventoryViewable' => false
+                'characterViewable' => true,
+                'inventoryViewable' => false,
+                'journalViewable' => true,
             ])
         ]);
     }

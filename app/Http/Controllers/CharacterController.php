@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 
 use DB;
 use Auth;
-use App\User;
-use App\Character;
 use App\Tag;
+use App\User;
+use App\Template;
+use App\Character;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -30,8 +31,7 @@ class CharacterController extends Controller
      */
     public function create()
     {
-        $templates = \DB::table('templates')->select('id', 'name')->get();
-        return view('character.create')->with('templates', $templates);
+        return view('character.create')->with('templates', Template::all());
     }
 
     /**
@@ -53,7 +53,7 @@ class CharacterController extends Controller
      */
     public function template(Request $request)
     {
-        $template = DB::table('templates')->find($request->template);
+        $template = Template::findOrFail($request->template);
         $char = new Character([
             'name' => $request->name,
             'stats' => $template->json
@@ -71,8 +71,7 @@ class CharacterController extends Controller
      */
     public function show($id)
     {
-        $character = Character::findOrFail($id)->viewable();
-        return view('character.show', compact('character'));
+        return view('character.show')->with('character', Character::findOrFail($id)->viewable());
     }
 
     /**
