@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Tag;
 use App\Http\Requests;
 
 class TagController extends Controller
@@ -15,7 +16,9 @@ class TagController extends Controller
      */
     public function index()
     {
-        //
+        $tags = Tag::all();
+        $colors = ['default', 'primary', 'success', 'info', 'warning', 'danger'];
+        return view('library.tag.index', compact('tags', 'colors'));
     }
 
     /**
@@ -25,7 +28,7 @@ class TagController extends Controller
      */
     public function create()
     {
-        //
+        return 'create tags';
     }
 
     /**
@@ -36,7 +39,7 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
     }
 
     /**

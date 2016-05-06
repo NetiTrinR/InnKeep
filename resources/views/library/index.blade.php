@@ -31,8 +31,8 @@
                             <p>
                                 Tags keep things in order and searchable. If you make a new inventory item and you don't tag it, good luck finding it else where. <small>The web bunnies like to take untagged items and forever obscure them in the database.</small>
                             </p>
-                            <a href="{{-- route('library.tag.create') --}}" class="btn btn-success">New a tag</a>
-                            <a href="{{-- route('library.tag.index') --}}" class="btn btn-default">All the tags</a>
+                            <a href="{{ route('library.tag.create') }}" class="btn btn-success">New a tag</a>
+                            <a href="{{ route('library.tag.index') }}" class="btn btn-default">All the tags</a>
                         </div>
                     </div>
                 </div>
