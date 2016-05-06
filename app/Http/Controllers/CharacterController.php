@@ -42,7 +42,8 @@ class CharacterController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd($request);
+        // $char = new Character()
     }
 
     /**

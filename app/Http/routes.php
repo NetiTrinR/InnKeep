@@ -26,7 +26,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::auth();
 
     Route::get('test', function(){
-        dd(App\User::all());
+        return '';
     });
 
     Route::get('/welcome', 'HomeController@welcome')->name('home.welcome');
@@ -45,6 +45,9 @@ Route::group(['middleware' => 'web'], function () {
             Route::resource('tag', 'TagController');
             Route::get('/', 'LibraryController@index')->name('library.index');
         });
+
+        Route::get('/user/{id}', 'UserController@show')->name('user.show');
+        Route::get('/user/{id}/edit', 'UserController@show')->name('user.edit');
 
         // Home
         Route::get('/', 'HomeController@index')->name('home');

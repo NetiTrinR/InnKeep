@@ -16,8 +16,8 @@ class Character extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function campaigns(){
-        return $this->belongsToMany(Campaign::class);
+    public function campaign(){
+        return $this->belongsTo(Campaign::class);
     }
 
     public function items(){
@@ -45,6 +45,10 @@ class Character extends Model
 
     public function getNotWeaponsAttribute(){
         return $this->items()->notWeapon()->get();
+    }
+
+    public function getJournalsViewableAttribute(){
+        return $this->journals()->viewable()->get();
     }
 
 }

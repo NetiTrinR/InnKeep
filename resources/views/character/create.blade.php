@@ -46,8 +46,17 @@
                         <p>
                             A custom character <b>requires</b> you <b>create all fields from scratch</b> and <b>write your own expressions</b> for auto completion functionality. This takes much longer and is more difficult. It is recommended you use a template unless you know what you are doing.
                         </p>
-                        <h3>WIP</h3>
-                        <!-- <button type="submit" class="btn btn-success">Create</button> -->
+                        <!-- Name Form Input -->
+                        <div class="form-group">
+                            <label for="name" class="control-label">Character Name</label>
+                            <input type="text" name="name" class="form-control" />
+                        </div>
+                        <!-- Stats Form Input -->
+                         <div class="form-group">
+                             <label for="stats" class="control-label">Stats</label>
+                             <textarea name="stats" rows="10" class="form-control"></textarea>
+                         </div>
+                        <button type="submit" class="btn btn-success pull-right">Create</button>
                     {!! Form::close() !!}
                 </div>
             </div>

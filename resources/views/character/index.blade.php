@@ -1,22 +1,17 @@
 @extends('layouts._app')
 
-@section('header.styles')
-    <style>
-        #searchcontainer > .glyphicon-remove:hover{
-            color: #3E3F3A;
-        }
-    </style>
-@endsection
-
 @section('content')
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Ye Adventurers</h3>
+                </div>
                 <div class="panel-body">
                     <!-- Search Form Input -->
                     <div class="row">
                         <div class="col-xs-11">
-                            <div id="searchcontainer" class="form-group">
+                            <div  class="form-group">
                                 <input id="searchinput" type="text" name="search" class="form-control" placeholder="Search Characters..." />
                             </div>
                         </div>
@@ -38,7 +33,7 @@
 @section('footer.scripts')
     <script type="text/javascript">
         $(document).ready(function () {
-            $('#searchlist').btsListFilter('#searchinput', {itemChild: 'span'});
+            $('#searchlist').btsListFilter('#searchinput', {itemChild: 'span', cancelNode:''});
         });
     </script>
 @endsection

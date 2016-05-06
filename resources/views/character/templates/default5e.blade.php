@@ -22,7 +22,7 @@
                 <div class="stat_field"><small>Alignment:</small> <span v-text="calc.alignment"></span></div>
             </div>
             <div class="col-xs-4">
-                <div class="stat_field"><small>Experience:</small> <span v-text="calc.experience"></span></div>
+                <div class="stat_field"><small>Campaign:</small> {{ $character->campaign->name }}</div>
             </div>
         </div>
     </div>
@@ -299,7 +299,7 @@
                 <div class="panel-body">
                     <!-- Proficiencies Form Input -->
                     <div class="form-group">
-                        <textarea name="proficiencies" rows="12" class="form-control" v-model="stats.proficiencies"></textarea>
+                        <textarea name="proficiencies" rows="12" class="form-control" v-model="stats.proficiencies" style="max-width: 100%"></textarea>
                     </div>
                 </div>
             </div>
@@ -408,7 +408,7 @@
             </div>
         </div>
         <div class="col-md-10">
-            @include('partials._item', $character->items, 'item')
+            @each('partials._item', $character->items, 'item')
         </div>
     </div>
 @endpush

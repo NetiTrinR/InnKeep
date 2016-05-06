@@ -19,7 +19,7 @@
                         <div class="form-group">
                             <label for="quantity" class="control-label">Quantity</label>
                             <div class="input-group">
-                                <input type="text" name="quantity" class="form-control input-sm" />
+                                <input type="text" name="quantity" class="form-control input-sm" value="{{ $item->quantity }}" />
                                 <div class="input-group-btn ">
                                     <button type="button" class="btn btn-danger btn-sm"><i class="glyphicon glyphicon-minus"></i></button>
                                     <button type="button" class="btn btn-success btn-sm"><i class="glyphicon glyphicon-plus"></i></button>
@@ -31,7 +31,7 @@
                     <!-- Unit Form Input -->
                     <div class="form-group">
                         <label for="unit" class="control-label">Unit</label>
-                        <input type="text" name="unit" class="form-control input-sm" />
+                        <input type="text" name="unit" class="form-control input-sm" value="{{ $item->unit }}" />
                     </div>
                 </div>
             </div>

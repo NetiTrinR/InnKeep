@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Journal;
 use App\Http\Requests;
 use Illuminate\Http\Request;
+use Session;
 
 class JournalController extends Controller
 {
@@ -15,7 +16,7 @@ class JournalController extends Controller
      */
     public function index()
     {
-        return view('library.journal.index')->with('entries', Journal::campaigns()->viewable()->simplePaginate(10));
+        return view('library.journal.index')->with('entries', Journal::campaigns()->viewable()->latest()->simplePaginate(10));
     }
 
     /**
@@ -25,7 +26,7 @@ class JournalController extends Controller
      */
     public function create()
     {
-        //
+        return view('library.journal.create');
     }
 
     /**
@@ -36,7 +37,13 @@ class JournalController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->all();
+        $input['user_id'] = \Auth::user()->id;
+        $input['viewable'] = !$request->private ?? true;
+        Journal::create($input);
+
+        Session::flash('success', 'Entry successfully submitted.');
+        return redirect()->route('library.journal.index');
     }
 
     /**
@@ -47,7 +54,11 @@ class JournalController extends Controller
      */
     public function show($id)
     {
-        //
+        $entry = Journal::find($id);
+        if($entry->id != \Auth::user()->id && !\Auth::user()->journalViewable){
+            return redirect()->back();
+        }
+        return view('library.journal.show')->with('entry', Journal::find($id));
     }
 
     /**
@@ -58,7 +69,7 @@ class JournalController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('library.journal.edit')->with('entry', Journal::find($id));
     }
 
     /**
@@ -70,7 +81,11 @@ class JournalController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $input = $request->all();
+        $input['user_id'] = \Auth::user()->id;
+        $input['viewable'] = !$request->private ?? true;
+        Journal::find($id)->update($input);
+        return redirect()->route('library.journal.index');
     }
 
     /**
@@ -81,6 +96,13 @@ class JournalController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $j = Journal::find($id);
+        if(\Auth::user()->id != $j->user->id)
+            Session::flash('warning', 'You don\'t have the privilage to made that change.');
+        else{
+            Session::flash('success', 'Journal Entry successfully deleted');
+            $j->delete();
+        }
+        return redirect()->route('library.journal.index');
     }
 }

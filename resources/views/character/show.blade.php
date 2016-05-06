@@ -84,7 +84,7 @@
                             @stack('inventory')
                         </div>
                         <div id="journal" class="tab-pane">
-                            Journal
+                            @each('partials._journalEntry', $character->journalsViewable, 'entry')
                         </div>
                         <div id="debug" class="tab-pane">
                             <pre>{{ print_r($character->items) }}</pre>

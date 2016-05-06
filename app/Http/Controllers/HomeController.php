@@ -19,10 +19,10 @@ class HomeController extends Controller
     public function index()
     {
         // dd(Journal::campaigns()->viewable()->get());
-        $announcements = Journal::campaigns()->viewable()
+        $journals = Journal::campaigns()->viewable()
             ->where('journals.created_at', '>=', \Carbon\Carbon::now()->subWeek(2)->startOfDay()) // Needs to have the journals otherwise it conflicts with the viewable join
-            ->get();
-        return view('home', compact('announcements'));
+            ->latest()->simplePaginate(4);
+        return view('home', compact('journals'));
     }
 }
 

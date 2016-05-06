@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Journal extends Model
 {
+
+    protected $fillable = ['campaign_id', 'character_id', 'entry', 'user_id', 'viewable'];
+
     public function campaign(){
         return $this->belongsTo(Campaign::class);
     }
@@ -19,7 +22,11 @@ class Journal extends Model
     }
 
     public function getViewableAttribute($value){
-        return (\Auth::user()->id == $this->user->id || ($value && $this->user->charactersJournalViewable));
+        return (\Auth::user()->id == $this->user->id || ($value && $this->user->journalViewable));
+    }
+
+    public function getAuthorAttribute(){
+        return count($this->character)? $this->character : $this->user;
     }
 
     public function scopeViewable($query){
@@ -34,7 +41,7 @@ class Journal extends Model
 
     public function scopeCampaigns($query){
         return $query->with('character')
-            ->whereIn('campaign_id', \Auth::user()->campaigns()->pluck('id'))
-            ->orderBy('created_at', 'ASC');
+            ->whereIn('campaign_id', \Auth::user()->campaigns->pluck('id'));
     }
+
 }

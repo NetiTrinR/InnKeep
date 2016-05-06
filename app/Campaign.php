@@ -17,7 +17,7 @@ class Campaign extends Model
     }
 
     public function characters(){
-        return $this->belongsToMany(Character::class);
+        return $this->hasMany(Character::class);
     }
 
     public function journals(){
