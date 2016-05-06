@@ -21,7 +21,8 @@ elixir(function(mix) {
     ], 'public/css/all.css', 'public/css/')
     .scripts([
         '../bootstrap/dist/js/bootstrap.js',
-        'bootstrap-list-filter.src.js'
+        'bootstrap-list-filter.src.js',
+        'fuse.js'
         ], 'public/js/all.js')
     .version(['css/all.css', '/js/all.js']);
 });
