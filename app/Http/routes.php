@@ -26,7 +26,8 @@ Route::group(['middleware' => 'web'], function () {
     Route::auth();
 
     Route::get('test', function(){
-        return '';
+        // $characters = \App\Character::with('user', 'campaign')->select('user.name', 'character.name', 'campaign.name')->get();
+        return view('test');//, compact('characters'));
     });
 
     Route::get('/welcome', 'HomeController@welcome')->name('home.welcome');
