@@ -87,7 +87,7 @@
                             @each('partials._journalEntry', $character->journalsViewable, 'entry')
                         </div>
                         <div id="debug" class="tab-pane">
-                            <pre>{{ print_r($character->items) }}</pre>
+                            {{-- <pre>{{ print_r($character->items) }}</pre> --}}
                             <pre>@{{ $data | json }}</pre>
                         </div>
                     </div>
@@ -126,15 +126,19 @@
                     // Set all non expressions fields in calculated
                     for(var key in data.stats){
                         if(!/\$\{(.*)\}/.test(data.stats[key])){
+                            // console.log(key, '=>', data.stats[key]);
                             data.calc[key] = data.stats[key];
                         }
                     }
                     // Make all of the calculated variables local
                     extract(data.calc);
+                    console.log(data.stats);
                     // Loop through the expressions, evaluate them, then save them as a local variable
                     for(var key in data.stats){
                         if(/\$\{(.*)\}/.test(data.stats[key]))
+                            console.log(key, '=>', data.stats[key]);
                             data.calc[key] = evalExpression(data.stats[key]);
+                            console.log(key, '=>', data.stats[key]);
                             window[key] = data.calc[key];
                     }
                     console.log(data.calc);
