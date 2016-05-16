@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="row">
-        <div class="col-md-8 col-md-offset-1">
+        <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title">Use a template <small>(Recommended)</small></h3>
@@ -20,7 +20,7 @@
                         <!-- Template Form Input -->
                         <div class="form-group">
                             <label for="template" class="control-label">Template</label>
-                            <select name="template" class="form-control">
+                            <select name="template" class="form-control chosen-select">
                                 @foreach($templates as $template)
                                     <option value="{{ $template->id }}">{{ $template->name }}</option>
                                 @endforeach
