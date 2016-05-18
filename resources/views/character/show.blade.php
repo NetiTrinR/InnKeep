@@ -69,7 +69,7 @@
                     <li><a href="#inventory" data-toggle="tab">Inventory</a></li>
                     <li><a href="#journal" data-toggle="tab">Journal</a></li>
                     <li><a href="#debug" data-toggle="tab">Debug</a></li>
-                    <li class="pull-right"><a href="">Edit</a></li>
+                    <li class="pull-right"><a href="{{ route('character.edit', $character->id) }}">Edit</a></li>
                 </ul>
                 <div class="panel-body">
                     <div class="tab-content">
