@@ -122,26 +122,37 @@
             },
             methods: {
                 evalExpressions: function(data){ // data = {stats: {}}
+                    // This is required. Don't remember why.
                     data.calc = {};
-                    // Set all non expressions fields in calculated
-                    for(var key in data.stats){
-                        if(!/\$\{(.*)\}/.test(data.stats[key])){
-                            // console.log(key, '=>', data.stats[key]);
-                            data.calc[key] = data.stats[key];
+                    // Keep looping till all of our calculated stats are calculated
+                    while(Object.keys(data.calc).length != Object.keys(data.stats).length){
+                        // Loop through each stat
+                        for(var key in data.stats){
+                            // If we've defined this stat already, skip it
+                            if(key in data.calc)
+                                continue;
+                            // We expect some ReferenceErrors
+                            try{
+                                // If it isn't an expression, go ahead and set it
+                                if(!/\$\{(.*)\}/.test(data.stats[key]))
+                                    data.calc[key] = data.stats[key];
+                                else // Otherwise evaluate it. Exception will happen within eval if broke.
+                                    data.calc[key] = evalExpression(data.stats[key]);
+                                extract(data.calc); // Make all of the calculated variables accessible
+                            }catch(e){
+                                // If the error is a reference error, it means one of our expressions requires another expression that hasn't been calculated yet. Deal with it on the next cycle
+                                if(e instanceof ReferenceError)
+                                    continue;
+                                else{ // If the error isn't a reference error, something broke and I should probably let the error catcher do its thing.
+                                    console.log(e);
+                                    throw e; // This does work right?
+                                }
+                            }
                         }
+                        // Debug, check how many vars were dependent on something else this cycle
+                        // console.log(Object.keys(data.stats).length - Object.keys(data.calc).length, "dependents vars this cycle");
                     }
-                    // Make all of the calculated variables local
-                    extract(data.calc);
-                    console.log(data.stats);
-                    // Loop through the expressions, evaluate them, then save them as a local variable
-                    for(var key in data.stats){
-                        if(/\$\{(.*)\}/.test(data.stats[key]))
-                            console.log(key, '=>', data.stats[key]);
-                            data.calc[key] = evalExpression(data.stats[key]);
-                            console.log(key, '=>', data.stats[key]);
-                            window[key] = data.calc[key];
-                    }
-                    console.log(data.calc);
+                    // console.log(data.calc);
                 },
                 checkProficiency: function(expression){
                     return (expression.indexOf('proficiency') > -1);
