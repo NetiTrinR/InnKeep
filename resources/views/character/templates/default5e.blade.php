@@ -134,75 +134,75 @@
                     <h3 class="panel-title">Skills</h3>
                 </div>
                 <div class="panel-body custom-rc">
-                    <input type="checkbox" name="acrobatics" v-model="checkProficiency(stat.acrobatics)">
+                    <input type="checkbox" name="acrobatics" v-model="checkProficiency(raw.acrobatics)">
                     <label for="acrobatics">
                         <span class="stat_field" v-text="stats.acrobatics"></span> Acrobatics
                     </label>
-                    <input type="checkbox" name="animal_handling" v-model="checkProficiency(stat.animal_handling)">
+                    <input type="checkbox" name="animal_handling" v-model="checkProficiency(raw.animal_handling)">
                     <label for="animal_handling">
                         <span class="stat_field" v-text="stats.animal_handling"></span> Animal Handling
                     </label>
-                    <input type="checkbox" name="arcana" v-model="checkProficiency(stat.arcana)">
+                    <input type="checkbox" name="arcana" v-model="checkProficiency(raw.arcana)">
                     <label for="arcana">
                         <span class="stat_field" v-text="stats.arcana"></span> Arcana
                     </label>
-                    <input type="checkbox" name="athletics" v-model="checkProficiency(stat.athletics)">
+                    <input type="checkbox" name="athletics" v-model="checkProficiency(raw.athletics)">
                     <label for="athletics">
                         <span class="stat_field" v-text="stats.athletics"></span> Athletics
                     </label>
-                    <input type="checkbox" name="deception" v-model="checkProficiency(stat.deception)">
+                    <input type="checkbox" name="deception" v-model="checkProficiency(raw.deception)">
                     <label for="deception">
                         <span class="stat_field" v-text="stats.deception"></span> Deception
                     </label>
-                    <input type="checkbox" name="history" v-model="checkProficiency(stat.history)">
+                    <input type="checkbox" name="history" v-model="checkProficiency(raw.history)">
                     <label for="history">
                         <span class="stat_field" v-text="stats.history"></span> History
                     </label>
-                    <input type="checkbox" name="insight" v-model="checkProficiency(stat.insight)">
+                    <input type="checkbox" name="insight" v-model="checkProficiency(raw.insight)">
                     <label for="insight">
                         <span class="stat_field" v-text="stats.insight"></span> Insight
                     </label>
-                    <input type="checkbox" name="intimidation" v-model="checkProficiency(stat.intimidation)">
+                    <input type="checkbox" name="intimidation" v-model="checkProficiency(raw.intimidation)">
                     <label for="intimidation">
                         <span class="stat_field" v-text="stats.intimidation"></span> Intimidation
                     </label>
-                    <input type="checkbox" name="investigation" v-model="checkProficiency(stat.investigation)">
+                    <input type="checkbox" name="investigation" v-model="checkProficiency(raw.investigation)">
                     <label for="investigation">
                         <span class="stat_field" v-text="stats.investigation"></span> Investigation
                     </label>
-                    <input type="checkbox" name="medicine" v-model="checkProficiency(stat.medicine)">
+                    <input type="checkbox" name="medicine" v-model="checkProficiency(raw.medicine)">
                     <label for="medicine">
                         <span class="stat_field" v-text="stats.medicine"></span> Medicine
                     </label>
-                    <input type="checkbox" name="nature" v-model="checkProficiency(stat.nature)">
+                    <input type="checkbox" name="nature" v-model="checkProficiency(raw.nature)">
                     <label for="nature">
                         <span class="stat_field" v-text="stats.nature"></span> Nature
                     </label>
-                    <input type="checkbox" name="perception" v-model="checkProficiency(stat.perception)">
+                    <input type="checkbox" name="perception" v-model="checkProficiency(raw.perception)">
                     <label for="perception">
                         <span class="stat_field" v-text="stats.perception"></span> Perception
                     </label>
-                    <input type="checkbox" name="performance" v-model="checkProficiency(stat.performance)">
+                    <input type="checkbox" name="performance" v-model="checkProficiency(raw.performance)">
                     <label for="performance">
                         <span class="stat_field" v-text="stats.performance"></span> Performance
                     </label>
-                    <input type="checkbox" name="persuasion" v-model="checkProficiency(stat.persuasion)">
+                    <input type="checkbox" name="persuasion" v-model="checkProficiency(raw.persuasion)">
                     <label for="persuasion">
                         <span class="stat_field" v-text="stats.persuasion"></span> Persuasion
                     </label>
-                    <input type="checkbox" name="religion" v-model="checkProficiency(stat.religion)">
+                    <input type="checkbox" name="religion" v-model="checkProficiency(raw.religion)">
                     <label for="religion">
                         <span class="stat_field" v-text="stats.religion"></span> Religion
                     </label>
-                    <input type="checkbox" name="sleight_of_hand" v-model="checkProficiency(stat.sleight_of_hand)">
+                    <input type="checkbox" name="sleight_of_hand" v-model="checkProficiency(raw.sleight_of_hand)">
                     <label for="sleight_of_hand">
                         <span class="stat_field" v-text="stats.slight_of_hand"></span> Sleight Of Hand
                     </label>
-                    <input type="checkbox" name="stealth" v-model="checkProficiency(stat.stealth)">
+                    <input type="checkbox" name="stealth" v-model="checkProficiency(raw.stealth)">
                     <label for="stealth">
                         <span class="stat_field" v-text="stats.stealth"></span> Stealth
                     </label>
-                    <input type="checkbox" name="survival" v-model="checkProficiency(stat.survival)">
+                    <input type="checkbox" name="survival" v-model="checkProficiency(raw.survival)">
                     <label for="survival">
                         <span class="stat_field" v-text="stats.survival"></span> Survival
                     </label>
