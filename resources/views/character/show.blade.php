@@ -114,8 +114,8 @@
         var vm = new Vue({
             el: "#vue-container",
             data: {
-                stats: {!! $character->stats !!},
-                calc: {}
+                raw: {!! $character->stats !!},
+                stats: {}
             },
             ready: function(){
                 this.evalExpressions(this.$data);
@@ -123,22 +123,22 @@
             methods: {
                 evalExpressions: function(data){ // data = {stats: {}}
                     // This is required. Don't remember why.
-                    data.calc = {};
+                    data.stats = {};
                     // Keep looping till all of our calculated stats are calculated
-                    while(Object.keys(data.calc).length != Object.keys(data.stats).length){
+                    while(Object.keys(data.stats).length != Object.keys(data.raw).length){
                         // Loop through each stat
-                        for(var key in data.stats){
+                        for(var key in data.raw){
                             // If we've defined this stat already, skip it
-                            if(key in data.calc)
+                            if(key in data.stats)
                                 continue;
                             // We expect some ReferenceErrors
                             try{
                                 // If it isn't an expression, go ahead and set it
-                                if(!/\$\{(.*)\}/.test(data.stats[key]))
-                                    data.calc[key] = data.stats[key];
+                                if(!/\$\{(.*)\}/.test(data.raw[key]))
+                                    data.stats[key] = data.raw[key];
                                 else // Otherwise evaluate it. Exception will happen within eval if broke.
-                                    data.calc[key] = evalExpression(data.stats[key]);
-                                extract(data.calc); // Make all of the calculated variables accessible
+                                    data.stats[key] = evalExpression(data.raw[key]);
+                                extract(data.stats); // Make all of the calculated variables accessible
                             }catch(e){
                                 // If the error is a reference error, it means one of our expressions requires another expression that hasn't been calculated yet. Deal with it on the next cycle
                                 if(e instanceof ReferenceError)
@@ -150,9 +150,9 @@
                             }
                         }
                         // Debug, check how many vars were dependent on something else this cycle
-                        // console.log(Object.keys(data.stats).length - Object.keys(data.calc).length, "dependents vars this cycle");
+                        // console.log(Object.keys(data.raw).length - Object.keys(data.stats).length, "dependents vars this cycle");
                     }
-                    // console.log(data.calc);
+                    // console.log(data.stats);
                 },
                 checkProficiency: function(expression){
                     return (expression.indexOf('proficiency') > -1);

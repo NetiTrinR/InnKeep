@@ -5,10 +5,10 @@
     <div class="col-md-7" style="margin-top: 12px;">
         <div class="row">
             <div class="col-xs-4">
-                <div class="stat_field"><small>Level &amp; Class:</small> <span v-text="calc.level"></span> <span v-text="calc.class"></span></div>
+                <div class="stat_field"><small>Level &amp; Class:</small> <span v-text="stats.level"></span> <span v-text="stats.class"></span></div>
             </div>
             <div class="col-xs-4">
-                <div class="stat_field"><small>Background:</small> <span v-text="calc.background"></span></div>
+                <div class="stat_field"><small>Background:</small> <span v-text="stats.background"></span></div>
             </div>
             <div class="col-xs-4">
                 <div class="stat_field"><small>Player:</small> {{ $character->user->name }}</div>
@@ -16,10 +16,10 @@
         </div>
         <div class="row">
             <div class="col-xs-4">
-                <div class="stat_field"><small>Race:</small> <span v-text="calc.race"></span></div>
+                <div class="stat_field"><small>Race:</small> <span v-text="stats.race"></span></div>
             </div>
             <div class="col-xs-4">
-                <div class="stat_field"><small>Alignment:</small> <span v-text="calc.alignment"></span></div>
+                <div class="stat_field"><small>Alignment:</small> <span v-text="stats.alignment"></span></div>
             </div>
             <div class="col-xs-4">
                 <div class="stat_field"><small>Campaign:</small> {{ $character->campaign->name }}</div>
@@ -33,44 +33,44 @@
             Strength
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <span v-text="calc.strength"></span>
+                    <span v-text="stats.strength"></span>
                 </div>
-                <div class="panel-footer" v-text="calc.str"></div>
+                <div class="panel-footer" v-text="stats.str"></div>
             </div>
             Dexterity
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <span v-text="calc.dexterity"></span>
+                    <span v-text="stats.dexterity"></span>
                 </div>
-                <div class="panel-footer" v-text="calc.dex"></div>
+                <div class="panel-footer" v-text="stats.dex"></div>
             </div>
             Constitution
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <span v-text="calc.constitution"></span>
+                    <span v-text="stats.constitution"></span>
                 </div>
-                <div class="panel-footer" v-text="calc.con"></div>
+                <div class="panel-footer" v-text="stats.con"></div>
             </div>
             Intellegence
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <span v-text="calc.intellegence"></span>
+                    <span v-text="stats.intellegence"></span>
                 </div>
-                <div class="panel-footer" v-text="calc.int"></div>
+                <div class="panel-footer" v-text="stats.int"></div>
             </div>
             Wisdom
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <span v-text="calc.wisdom"></span>
+                    <span v-text="stats.wisdom"></span>
                 </div>
-                <div class="panel-footer" v-text="calc.wis"></div>
+                <div class="panel-footer" v-text="stats.wis"></div>
             </div>
             Charisma
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <span v-text="calc.charisma"></span>
+                    <span v-text="stats.charisma"></span>
                 </div>
-                <div class="panel-footer" v-text="calc.cha"></div>
+                <div class="panel-footer" v-text="stats.cha"></div>
             </div>
         </div>
         <div class="col-md-9">
@@ -103,29 +103,29 @@
                     <h3 class="panel-title">Saving Throws</h3>
                 </div>
                 <div class="panel-body custom-rc">
-                    <input type="checkbox" name="str_save" v-model="checkProficiency(stats.str_save)">
+                    <input type="checkbox" name="str_save" v-model="checkProficiency(raw.str_save)">
                     <label for="str_save">
-                        <span class="stat_field" v-text="calc.str_save"></span> Strength
+                        <span class="stat_field" v-text="stats.str_save"></span> Strength
                     </label>
-                    <input type="checkbox" name="dex_save" v-model="checkProficiency(stats.dex_save)">
+                    <input type="checkbox" name="dex_save" v-model="checkProficiency(raw.dex_save)">
                     <label for="dex_save">
-                        <span class="stat_field" v-text="calc.dex_save"></span> Dexterity
+                        <span class="stat_field" v-text="stats.dex_save"></span> Dexterity
                     </label>
-                    <input type="checkbox" name="con_save" v-model="checkProficiency(stats.con_save)">
+                    <input type="checkbox" name="con_save" v-model="checkProficiency(raw.con_save)">
                     <label for="con_save">
-                        <span class="stat_field" v-text="calc.con_save"></span> Constitution
+                        <span class="stat_field" v-text="stats.con_save"></span> Constitution
                     </label>
-                    <input type="checkbox" name="int_save" v-model="checkProficiency(stats.int_save)">
+                    <input type="checkbox" name="int_save" v-model="checkProficiency(raw.int_save)">
                     <label for="int_save">
-                        <span class="stat_field" v-text="calc.int_save"></span> Intellegence
+                        <span class="stat_field" v-text="stats.int_save"></span> Intellegence
                     </label>
-                    <input type="checkbox" name="wis_save" v-model="checkProficiency(stats.wis_save)">
+                    <input type="checkbox" name="wis_save" v-model="checkProficiency(raw.wis_save)">
                     <label for="wis_save">
-                        <span class="stat_field" v-text="calc.wis_save"></span> Wisdom
+                        <span class="stat_field" v-text="stats.wis_save"></span> Wisdom
                     </label>
-                    <input type="checkbox" name="cha_save" v-model="checkProficiency(stats.cha_save)">
+                    <input type="checkbox" name="cha_save" v-model="checkProficiency(raw.cha_save)">
                     <label for="cha_save">
-                        <span class="stat_field" v-text="calc.cha_save"></span> Charisma
+                        <span class="stat_field" v-text="stats.cha_save"></span> Charisma
                     </label >
                 </div>
             </div>
@@ -136,75 +136,75 @@
                 <div class="panel-body custom-rc">
                     <input type="checkbox" name="acrobatics" v-model="checkProficiency(stat.acrobatics)">
                     <label for="acrobatics">
-                        <span class="stat_field" v-text="calc.acrobatics"></span> Acrobatics
+                        <span class="stat_field" v-text="stats.acrobatics"></span> Acrobatics
                     </label>
                     <input type="checkbox" name="animal_handling" v-model="checkProficiency(stat.animal_handling)">
                     <label for="animal_handling">
-                        <span class="stat_field" v-text="calc.animal_handling"></span> Animal Handling
+                        <span class="stat_field" v-text="stats.animal_handling"></span> Animal Handling
                     </label>
                     <input type="checkbox" name="arcana" v-model="checkProficiency(stat.arcana)">
                     <label for="arcana">
-                        <span class="stat_field" v-text="calc.arcana"></span> Arcana
+                        <span class="stat_field" v-text="stats.arcana"></span> Arcana
                     </label>
                     <input type="checkbox" name="athletics" v-model="checkProficiency(stat.athletics)">
                     <label for="athletics">
-                        <span class="stat_field" v-text="calc.athletics"></span> Athletics
+                        <span class="stat_field" v-text="stats.athletics"></span> Athletics
                     </label>
                     <input type="checkbox" name="deception" v-model="checkProficiency(stat.deception)">
                     <label for="deception">
-                        <span class="stat_field" v-text="calc.deception"></span> Deception
+                        <span class="stat_field" v-text="stats.deception"></span> Deception
                     </label>
                     <input type="checkbox" name="history" v-model="checkProficiency(stat.history)">
                     <label for="history">
-                        <span class="stat_field" v-text="calc.history"></span> History
+                        <span class="stat_field" v-text="stats.history"></span> History
                     </label>
                     <input type="checkbox" name="insight" v-model="checkProficiency(stat.insight)">
                     <label for="insight">
-                        <span class="stat_field" v-text="calc.insight"></span> Insight
+                        <span class="stat_field" v-text="stats.insight"></span> Insight
                     </label>
                     <input type="checkbox" name="intimidation" v-model="checkProficiency(stat.intimidation)">
                     <label for="intimidation">
-                        <span class="stat_field" v-text="calc.intimidation"></span> Intimidation
+                        <span class="stat_field" v-text="stats.intimidation"></span> Intimidation
                     </label>
                     <input type="checkbox" name="investigation" v-model="checkProficiency(stat.investigation)">
                     <label for="investigation">
-                        <span class="stat_field" v-text="calc.investigation"></span> Investigation
+                        <span class="stat_field" v-text="stats.investigation"></span> Investigation
                     </label>
                     <input type="checkbox" name="medicine" v-model="checkProficiency(stat.medicine)">
                     <label for="medicine">
-                        <span class="stat_field" v-text="calc.medicine"></span> Medicine
+                        <span class="stat_field" v-text="stats.medicine"></span> Medicine
                     </label>
                     <input type="checkbox" name="nature" v-model="checkProficiency(stat.nature)">
                     <label for="nature">
-                        <span class="stat_field" v-text="calc.nature"></span> Nature
+                        <span class="stat_field" v-text="stats.nature"></span> Nature
                     </label>
                     <input type="checkbox" name="perception" v-model="checkProficiency(stat.perception)">
                     <label for="perception">
-                        <span class="stat_field" v-text="calc.perception"></span> Perception
+                        <span class="stat_field" v-text="stats.perception"></span> Perception
                     </label>
                     <input type="checkbox" name="performance" v-model="checkProficiency(stat.performance)">
                     <label for="performance">
-                        <span class="stat_field" v-text="calc.performance"></span> Performance
+                        <span class="stat_field" v-text="stats.performance"></span> Performance
                     </label>
                     <input type="checkbox" name="persuasion" v-model="checkProficiency(stat.persuasion)">
                     <label for="persuasion">
-                        <span class="stat_field" v-text="calc.persuasion"></span> Persuasion
+                        <span class="stat_field" v-text="stats.persuasion"></span> Persuasion
                     </label>
                     <input type="checkbox" name="religion" v-model="checkProficiency(stat.religion)">
                     <label for="religion">
-                        <span class="stat_field" v-text="calc.religion"></span> Religion
+                        <span class="stat_field" v-text="stats.religion"></span> Religion
                     </label>
                     <input type="checkbox" name="sleight_of_hand" v-model="checkProficiency(stat.sleight_of_hand)">
                     <label for="sleight_of_hand">
-                        <span class="stat_field" v-text="calc.slight_of_hand"></span> Sleight Of Hand
+                        <span class="stat_field" v-text="stats.slight_of_hand"></span> Sleight Of Hand
                     </label>
                     <input type="checkbox" name="stealth" v-model="checkProficiency(stat.stealth)">
                     <label for="stealth">
-                        <span class="stat_field" v-text="calc.stealth"></span> Stealth
+                        <span class="stat_field" v-text="stats.stealth"></span> Stealth
                     </label>
                     <input type="checkbox" name="survival" v-model="checkProficiency(stat.survival)">
                     <label for="survival">
-                        <span class="stat_field" v-text="calc.survival"></span> Survival
+                        <span class="stat_field" v-text="stats.survival"></span> Survival
                     </label>
                 </div>
             </div>
@@ -217,7 +217,7 @@
                     <div class="panel-heading">
                         <h3 class="panel-title text-center">AC</h3>
                     </div>
-                    <div class="panel-body text-center" v-text="calc.ac"></div>
+                    <div class="panel-body text-center" v-text="stats.ac"></div>
                 </div>
             </div>
             <div class="col-md-4">
@@ -225,7 +225,7 @@
                     <div class="panel-heading">
                         <h3 class="panel-title text-center">Initiative</h3>
                     </div>
-                    <div class="panel-body text-center" v-text="calc.dex"></div>
+                    <div class="panel-body text-center" v-text="stats.dex"></div>
                 </div>
             </div>
             <div class="col-md-4">
@@ -233,7 +233,7 @@
                     <div class="panel-heading">
                         <h3 class="panel-title text-center">Speed</h3>
                     </div>
-                    <div class="panel-body text-center" v-text="calc.speed"></div>
+                    <div class="panel-body text-center" v-text="stats.speed"></div>
                 </div>
             </div>
         </div>
@@ -265,7 +265,7 @@
                     <div class="panel-heading">
                         <h3 class="panel-title">Hit Die</h3>
                     </div>
-                    <div class="panel-body" v-text="calc.hp"></div>
+                    <div class="panel-body" v-text="stats.hp"></div>
                 </div>
             </div>
             <div class="col-md-8">
