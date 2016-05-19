@@ -82,7 +82,7 @@
                 }else{
                     $(selector).show();
                 }
-            })
+            });
         });
     </script>
 @endsection

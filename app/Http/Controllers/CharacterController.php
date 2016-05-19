@@ -88,8 +88,7 @@ class CharacterController extends Controller
      */
     public function edit($id)
     {
-        dd(Character::find($id));
-        return view('character.edit')->with('character', Character::find($id)->viewable());
+        return view('character.edit')->with('character', Character::findOrFail($id)->viewable())->with('i', -1);
     }
 
     /**
