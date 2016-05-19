@@ -8,12 +8,14 @@
                     <h3 class="panel-title">New Tag</h3>
                 </div>
                 <div class="panel-body">
-                    <!-- Name Form Input -->
-                    <div class="form-group">
-                        <label for="name" class="control-label">Tag Name</label>
-                        <input type="text" name="name" class="form-control" />
-                    </div>
-                    <input type="submit" value="Create" class="btn btn-success pull-right">
+                    {!! Form::open(['route'=>'library.tag.store']) !!}
+                        <!-- Name Form Input -->
+                        <div class="form-group">
+                            <label for="name" class="control-label">Tag Name</label>
+                            <input type="text" name="name" class="form-control" />
+                        </div>
+                        <input type="submit" value="Create" class="btn btn-success pull-right">
+                    {!! Form::close() !!}
                 </div>
             </div>
         </div>

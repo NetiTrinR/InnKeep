@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Session;
 use App\Journal;
 use App\Http\Requests;
 use Illuminate\Http\Request;
-use Session;
+use App\Http\Requests\CreateJournalRequest;
 
 class JournalController extends Controller
 {
@@ -37,6 +38,7 @@ class JournalController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, Journal::rules, Journal::errMsgs);
         $input = $request->all();
         $input['user_id'] = \Auth::user()->id;
         $input['viewable'] = !$request->private ?? true;
@@ -81,11 +83,16 @@ class JournalController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $input = $request->all();
-        $input['user_id'] = \Auth::user()->id;
-        $input['viewable'] = !$request->private ?? true;
-        Journal::find($id)->update($input);
-        return redirect()->route('library.journal.index');
+        $this->validate($request, Journal::rules, Journal::errMsgs);
+        if(\Auth::user()->id != $j->user->id)
+           Session::flash('warning', 'You don\'t have the privilage to made that change.');
+        else{
+            Session::flash('success', 'Journal Entry successfully updated');
+            $input = $request->all();
+            $input['viewable'] = !$request->private ?? true;
+            Journal::find($id)->update($input);
+        }
+        return redirect()->back();
     }
 
     /**
@@ -100,7 +107,7 @@ class JournalController extends Controller
         if(\Auth::user()->id != $j->user->id)
             Session::flash('warning', 'You don\'t have the privilage to made that change.');
         else{
-            Session::flash('success', 'Journal Entry successfully deleted');
+            Session::flash('success', 'Journal Entry successfully deleted.');
             $j->delete();
         }
         return redirect()->route('library.journal.index');

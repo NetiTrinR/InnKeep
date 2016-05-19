@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
 use App\Tag;
 use App\Http\Requests;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class TagController extends Controller
 {
@@ -39,6 +39,10 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, ['name'=>'required|unique:tags']);
+        Tag::create($request->all());
+        Session::flash('success', 'Tag successfully created.');
+        return redirect()->route('library.tag.index');
 
     }
 
@@ -50,7 +54,8 @@ class TagController extends Controller
      */
     public function show($id)
     {
-        //
+        dd('tag show route');
+        return view('library.tag.show');
     }
 
     /**
@@ -73,7 +78,10 @@ class TagController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, ['name'=>'required|unique:tags']);
+        Tag::create($request->all());
+        Session::flash('success', 'Tag successfully updated.');
+        return redirect()->route('library.tag.index');
     }
 
     /**

@@ -14,9 +14,9 @@ class TagTableSeeder extends Seeder
         DB::table('tags')->truncate();
         DB::table('tags')->insert([
             ['name' => 'D&D 5e'],
-            ['name' => 'Players Handbook'],
-            ['name' => 'Magic Item'],
-            ['name' => 'Weapon']
+            ['name' => 'players handbook'],
+            ['name' => 'magic item'],
+            ['name' => 'weapon']
         ]);
     }
 }

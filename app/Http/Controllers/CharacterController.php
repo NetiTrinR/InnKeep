@@ -42,8 +42,11 @@ class CharacterController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
-        // $char = new Character()
+        $request['stats'] = trim(preg_replace('/\s+/', ' ', $request->stats)); // Trim whitespace
+        $this->validate($request, ['name' => 'required', 'stats' => 'required|json']);
+        $char = new Character($request->all());
+        Auth::user()->characters()->save($char);
+        return redirect()->route('character.edit', $char->id);
     }
 
     /**
@@ -54,6 +57,7 @@ class CharacterController extends Controller
      */
     public function template(Request $request)
     {
+        $this->validate($request, ['name' => 'required']);
         $template = Template::findOrFail($request->template);
         $char = new Character([
             'name' => $request->name,
@@ -61,7 +65,7 @@ class CharacterController extends Controller
         ]);
         Auth::user()->characters()->save($char);
 
-        return redirect()->route('character.edit', $char);
+        return redirect()->route('character.edit', $char->id);
     }
 
     /**
@@ -83,8 +87,8 @@ class CharacterController extends Controller
      */
     public function edit($id)
     {
-        $character = Character::find($id);
-        return view('character.edit')->with('character', $character);
+        dd(Character::find($id));
+        return view('character.edit')->with('character', Character::find($id)->viewable());
     }
 
     /**
@@ -96,7 +100,15 @@ class CharacterController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, ['name' => 'required|alpha_num', 'stats' => 'required|json', 'campaign_id' => 'exists:campaigns']);
+        $char = Character::find($id);
+        if(\Auth::user()->id != $char->user()->id)
+            Session::flash('warning', 'You don\'t have the privilage to made that change.');
+        else{
+            Session::flash('success', 'Character successfully updated');
+            $char->update($request);
+        }
+        return redirect()->route('character.show', $id);
     }
 
     /**
@@ -107,6 +119,13 @@ class CharacterController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $char = Character::find($id);
+        if(\Auth::user()->id != $j->user->id)
+            Session::flash('warning', 'You don\'t have the privilage to made that change.');
+        else{
+            Session::flash('success', 'Character has been successfully deleted.');
+            $char->delete();
+        }
+        return redirect()->route('character.index');
     }
 }

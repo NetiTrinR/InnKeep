@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="row">
-        <div class="col-md-8 col-md-offset-1">
+        <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title">Use a template <small>(Recommended)</small></h3>
@@ -49,12 +49,13 @@
                         <!-- Name Form Input -->
                         <div class="form-group">
                             <label for="name" class="control-label">Character Name</label>
-                            <input type="text" name="name" class="form-control" />
+                            <input type="text" name="name" class="form-control" value="{{ old('name') }}"/>
                         </div>
                         <!-- Stats Form Input -->
                          <div class="form-group">
                              <label for="stats" class="control-label">Stats</label>
-                             <textarea name="stats" rows="10" class="form-control"></textarea>
+                             <textarea name="stats" rows="10" class="form-control">{{ old('stats') }}</textarea>
+                             <p class="help-block">Quotes, and Brakets are required.</p>
                          </div>
                         <button type="submit" class="btn btn-success pull-right">Create</button>
                     {!! Form::close() !!}
@@ -63,4 +64,14 @@
         </div>
 
     </div>
+@endsection
+
+@section('footer.scripts')
+    <script  type="text/javascript">
+        $(document).on('submit', function(){
+            if($('*[name=stats]').val()[0] !== '"' && $('*[name=stats]').val()[0] !== "'"){
+                $('*[name=stats]').val('"'+$('*[name=stats]').val()+'"');
+            }
+        });
+    </script>
 @endsection

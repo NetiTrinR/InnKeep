@@ -11,20 +11,16 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-md-6">
-                            <h3>Ye Shit</h3>
-                            <ul>
-                                <a href="{{ route('character.index') }}" class="btn btn-default">My Characters</a>
-                                <a href="{{ url('#') }}" class="btn btn-default">My Campaigns</a>
-                                <a href="{{ route('library.journal.index') }}" class="btn btn-default">All Viewable Journals</a>
-                            </ul>
+                            <h3>Ye Shit <small>View your things</small></h3>
+                            <a href="{{ route('character.index') }}" class="btn btn-default">My Characters</a>
+                            <a href="{{ url('#') }}" class="btn btn-default">My Campaigns</a>
+                            <a href="{{ route('library.journal.index') }}" class="btn btn-default">All Viewable Journals</a>
                         </div>
                         <div class="col-md-6">
-                            <h3>Ye Scrub</h3>
-                            <ul>
-                                <li><a href="{{ route('character.create') }}">Make a new Character</a></li>
-                                <li><a href="{{-- route('campaign.index') --}}">Join Campaign (Players)</a></li>
-                                <li><a href="{{-- route('campaign.create') --}}">Make a Campaign (DMs)</a></li>
-                            </ul>
+                            <h3>Ye Scrub <small>Make new things</small></h3>
+                            <a href="{{ route('character.create') }}" class="btn btn-success">Make a new Character</a>
+                            <!-- <a href="{{-- route('campaign.index') --}}" class="btn btn-primary">Join Campaign (Players)</a> -->
+                            <a href="{{-- route('campaign.create') --}}" class="btn btn-success">Make a Campaign (DMs)</a>
                         </div>
                     </div>
                     <h3>Ye Olde Journal</h3>

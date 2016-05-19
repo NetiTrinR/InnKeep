@@ -4,13 +4,18 @@ namespace App;
 
 use Eloquent\Dialect\Json;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Character extends Model
 {
     use Json;
+    use SoftDeletes;
+
     protected $jsonColumns = ['stats'];
 
     protected $fillable = ['name', 'stats'];
+
+    protected $dates = ['deleted_at'];
 
     public function user(){
         return $this->belongsTo(User::class);
@@ -33,9 +38,8 @@ class Character extends Model
     }
 
     public function viewable(){
-        if(\Auth::user()->id != $this->user->id && !$this->user->characterViewable){
+        if(\Auth::user()->id != $this->user->id && !$this->user->characterViewable)
             throw (new Exceptions\CharacterNotViewable);
-        }
         return $this;
     }
 

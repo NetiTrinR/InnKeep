@@ -21,7 +21,7 @@
     @include('partials._navigation')
     <div class="container-fluid">
         <div class="row">
-            <div id="notifications" class="col-md-8 col-md-offset-2">
+            <div id="notifications" class="col-md-10 col-md-offset-1">
                 @include('partials._notifications')
             </div>
         </div>

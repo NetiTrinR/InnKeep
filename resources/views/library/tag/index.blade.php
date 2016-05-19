@@ -28,7 +28,7 @@
                     </div>
                 </div>
                 <div class="text-center">
-                    <span v-for="tag in tags" class="label label-@{{ colors[Math.floor((Math.random() * colors.length)) % colors.length] }}">@{{ tag.name }}</span>
+                    <span v-for="tag in tags" class="label label-default">@{{ tag.name }}</span>
                 </div>
             </div>
         </div>

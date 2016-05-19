@@ -17,7 +17,8 @@ elixir(function(mix) {
     mix.less('bootstrap.less', 'public/css/bootstrap.css')
     .styles([
         'bootstrap.css',
-        'custom.css'
+        'custom.css',
+        'bootstrap-panel-tabs.css'
     ], 'public/css/all.css', 'public/css/')
     .scripts([
         '../bootstrap/dist/js/bootstrap.js',

@@ -42,7 +42,7 @@ class User extends Authenticatable
     ];
 
     /**
-     * A User can have many Campaigns through Characters.
+     * A User can have many Campaigns through Character.
      */
     public function getCampaignsAttribute() {
         return Campaign::whereHas('characters', function($query){

@@ -9,6 +9,17 @@ class Journal extends Model
 
     protected $fillable = ['campaign_id', 'character_id', 'entry', 'user_id', 'viewable'];
 
+    protected $rules = [
+        "character_id" => "exists:characters",
+        "campaign_id" => "required|exists:campaigns",
+        "entry" => "required|mix:10|alpha_dash"
+    ];
+
+    public $errMsgs = [
+        "character_id.exists" => "Must select a valid character",
+        "campaign_id.exists" => "Must select a valid campaign"
+    ];
+
     public function campaign(){
         return $this->belongsTo(Campaign::class);
     }
