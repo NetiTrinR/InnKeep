@@ -26,10 +26,8 @@ Route::group(['middleware' => 'web'], function () {
     Route::auth();
 
     Route::get('test', function(){
-        dd(json_decode('{
-    "isValid": true,
-    "justChecking": 10
-}'));
+        // $characters = \App\Character::with('user', 'campaign')->select('user.name', 'character.name', 'campaign.name')->get();
+        return view('test');//, compact('characters'));
     });
 
     Route::get('/welcome', 'HomeController@welcome')->name('home.welcome');

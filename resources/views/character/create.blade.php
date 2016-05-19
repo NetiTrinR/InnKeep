@@ -20,7 +20,7 @@
                         <!-- Template Form Input -->
                         <div class="form-group">
                             <label for="template" class="control-label">Template</label>
-                            <select name="template" class="form-control">
+                            <select name="template" class="form-control chosen-select">
                                 @foreach($templates as $template)
                                     <option value="{{ $template->id }}">{{ $template->name }}</option>
                                 @endforeach

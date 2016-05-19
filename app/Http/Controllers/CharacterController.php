@@ -21,7 +21,8 @@ class CharacterController extends Controller
      */
     public function index()
     {
-        return view('character.index')->with('characters', Auth::user()->characters()->get());
+        $characters = Auth::user()->characters()->with('campaign')->get();
+        return view('character.index', compact('characters'));
     }
 
     /**
