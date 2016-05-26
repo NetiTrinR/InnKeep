@@ -35,7 +35,7 @@ Route::group(['middleware' => 'web'], function () {
     // Login required
     Route::group(['middleware'=>'auth'], function(){
 
-        //Character
+        // Character
         Route::resource('character', 'CharacterController');
         Route::post('character/template', 'CharacterController@template')->name('character.store.template');
 
@@ -46,6 +46,9 @@ Route::group(['middleware' => 'web'], function () {
             Route::resource('tag', 'TagController');
             Route::get('/', 'LibraryController@index')->name('library.index');
         });
+
+        // Campaign
+        Route::resource('campaign', 'CampaignController');
 
         Route::get('/user/{id}', 'UserController@show')->name('user.show');
         Route::get('/user/{id}/edit', 'UserController@show')->name('user.edit');
