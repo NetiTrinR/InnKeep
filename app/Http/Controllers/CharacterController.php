@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use DB;
 use Auth;
 use App\Tag;
+use Session;
 use App\User;
+use Validator;
 use App\Template;
 use App\Character;
 use App\Http\Requests;
@@ -60,11 +62,16 @@ class CharacterController extends Controller
     {
         $this->validate($request, ['name' => 'required']);
         $template = Template::findOrFail($request->template);
+        $user = Auth::user();
         $char = new Character([
             'name' => $request->name,
             'stats' => $template->json
         ]);
-        Auth::user()->characters()->save($char);
+        DB::transaction(function() use ($char, $user, $template){
+            $char->save();
+            $user->characters()->save($char);
+            $template->characters()->save($char);
+        });
 
         return redirect()->route('character.edit', $char->id);
     }
@@ -88,7 +95,7 @@ class CharacterController extends Controller
      */
     public function edit($id)
     {
-        return view('character.edit')->with('character', Character::findOrFail($id)->viewable())->with('i', -1);
+        return view('character.edit')->with('character', Character::findOrFail($id)->viewable())->with('i', 0);
     }
 
     /**
@@ -100,13 +107,21 @@ class CharacterController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, ['name' => 'required|alpha_num', 'stats' => 'required|json', 'campaign_id' => 'exists:campaigns']);
+
+        // Put stats back into json
+        $input = $request->only(['name', '_method', '_token']);
+        $input['stats'] = json_encode($request->except(['name', '_method', '_token']));
+
+        // Validation
+        $v = Validator::make($input, ['name' => 'required|alpha_num', 'stats' => 'required|json', 'campaign_id' => 'exists:campaigns']);
+
+        // Authentication
         $char = Character::find($id);
-        if(\Auth::user()->id != $char->user()->id)
+        if(\Auth::user()->id != $char->user->id)
             Session::flash('warning', 'You don\'t have the privilage to made that change.');
         else{
             Session::flash('success', 'Character successfully updated');
-            $char->update($request);
+            $char->update($input);
         }
         return redirect()->route('character.show', $id);
     }

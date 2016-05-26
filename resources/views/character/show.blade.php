@@ -21,7 +21,7 @@
                             @include($character->template->bladeInclude)
                         </div>
                         <div id="inventory" class="tab-pane">
-                            @stack('inventory')
+                            @yield('inventory')
                         </div>
                         <div id="journal" class="tab-pane">
                             @each('partials._journalEntry', $character->journalsViewable, 'entry')
@@ -73,9 +73,9 @@
                                 continue;
                             // We expect some ReferenceErrors
                             try{
-                                // If it isn't an expression, go ahead and set it
+                                // If it isn't an expression, go ahead and set it, ensure it is the correct data type
                                 if(!/\$\{(.*)\}/.test(data.raw[key]))
-                                    data.stats[key] = data.raw[key];
+                                    data.stats[key] = isNaN(data.raw[key]) || data.raw[key] === '' ? data.raw[key] : parseInt(data.raw[key]);
                                 else // Otherwise evaluate it. Exception will happen within eval if broke.
                                     data.stats[key] = evalExpression(data.raw[key]);
                                 extract(data.stats); // Make all of the calculated variables accessible
@@ -83,10 +83,9 @@
                                 // If the error is a reference error, it means one of our expressions requires another expression that hasn't been calculated yet. Deal with it on the next cycle
                                 if(e instanceof ReferenceError)
                                     continue;
-                                else{ // If the error isn't a reference error, something broke and I should probably let the error catcher do its thing.
-                                    console.log(e);
+                                else // If the error isn't a reference error, something broke and I should probably let the error catcher do its thing.
                                     throw e; // This does work right?
-                                }
+                                // console.log(e);
                             }
                         }
                         // Debug, check how many vars were dependent on something else this cycle

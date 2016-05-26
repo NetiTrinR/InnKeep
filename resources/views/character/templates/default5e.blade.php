@@ -22,7 +22,7 @@
                 <div class="stat_field"><small>Alignment:</small> <span v-text="stats.alignment"></span></div>
             </div>
             <div class="col-xs-4">
-                <div class="stat_field"><small>Campaign:</small> {{ $character->campaign->name }}</div>
+                <div class="stat_field"><small>Campaign:</small> {{ $character->campaign->name or '' }}</div>
             </div>
         </div>
     </div>
@@ -74,24 +74,6 @@
             </div>
         </div>
         <div class="col-md-9">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Inspiration</h3>
-                </div>
-                <div class="panel-body">
-                    <!-- Inspiration Form Input -->
-                    <div class="form-group">
-                        <!-- <label for="inspiration" class="control-label">Inspiration</label> -->
-                        <div class="input-group input-group-sm">
-                            <input type="text" name="inspiration" class="form-control" v-model="stats.inspiration" />
-                            <div class="input-group-btn">
-                                <button type="button" class="btn btn-danger"><i class="glyphicon glyphicon-minus"></i></button>
-                                <button type="button" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title">Proficiency Bonus</h3>
@@ -255,38 +237,29 @@
                     <label for="temporary" class="control-label">Temporary Hit Points</label>
                     <input type="text" name="temporary" class="form-control input-sm" v-model="stats.hp_temp" />
                 </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-4">
-                <!-- <label class="control-label">Hit Die</label>
-                <p class="form-static-control" v-text="hit_die"></p> -->
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">Hit Die</h3>
-                    </div>
-                    <div class="panel-body" v-text="stats.hp"></div>
+                <!-- Hit Die Form Input -->
+                <div class="form-group" style="margin-bottom: 0">
+                    <label class="control-label">Hit Die</label>
+                    <span class="form-static-control pull-right" v-text="stats.hp"></span>
                 </div>
             </div>
-            <div class="col-md-8">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">Death Saves</h3>
-                    </div>
-                    <div class="panel-body">
-                        Success:
-                        <div class="custom-rc clickable inline text-center"> <!-- style="margin-top:0;"> -->
-                            <input type="checkbox" name="success_1"><label for="success_1"></label>
-                            <input type="checkbox" name="success_2"><label for="success_2"></label>
-                            <input type="checkbox" name="success_3"><label for="success_3"></label>
-                        </div>
-                        Failures:
-                        <div class="custom-rc clickable inline text-center"> <!-- style="margin-top:0;"> -->
-                            <input type="checkbox" name="fail_1"><label for="fail_1"></label>
-                            <input type="checkbox" name="fail_2"><label for="fail_2"></label>
-                            <input type="checkbox" name="fail_3"><label for="fail_3"></label>
-                        </div>
-                    </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Death Saves</h3>
+            </div>
+            <div class="panel-body">
+                Success:
+                <div class="custom-rc clickable inline text-center"> <!-- style="margin-top:0;"> -->
+                    <input type="checkbox" name="success_1"><label for="success_1"></label>
+                    <input type="checkbox" name="success_2"><label for="success_2"></label>
+                    <input type="checkbox" name="success_3"><label for="success_3"></label>
+                </div>
+                Failures:
+                <div class="custom-rc clickable inline text-center"> <!-- style="margin-top:0;"> -->
+                    <input type="checkbox" name="fail_1"><label for="fail_1"></label>
+                    <input type="checkbox" name="fail_2"><label for="fail_2"></label>
+                    <input type="checkbox" name="fail_3"><label for="fail_3"></label>
                 </div>
             </div>
         </div>
@@ -307,6 +280,24 @@
         </div>
     </div>
     <div class="col-md-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Inspiration</h3>
+            </div>
+            <div class="panel-body">
+                <!-- Inspiration Form Input -->
+                <div class="form-group">
+                    <!-- <label for="inspiration" class="control-label">Inspiration</label> -->
+                    <div class="input-group input-group-sm">
+                        <input type="text" name="inspiration" class="form-control" v-model="stats.inspiration" />
+                        <div class="input-group-btn">
+                            <button type="button" class="btn btn-danger"><i class="glyphicon glyphicon-minus"></i></button>
+                            <button type="button" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3 class="panel-title">Weapons</h3>
@@ -368,9 +359,10 @@
     </div>
 </div>
 
-@push('inventory')
+@section('inventory')
     <div class="row">
         <div class="col-md-2">
+            <h4>Currency</h4>
             <!-- Cp Form Input -->
             <div class="form-group">
                 <div class="input-group">
@@ -411,4 +403,4 @@
             @each('partials._item', $character->items, 'item')
         </div>
     </div>
-@endpush
+@endsection
