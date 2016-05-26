@@ -52,7 +52,7 @@ class Handler extends ExceptionHandler
             return back();
         }
         if($e instanceof ModelNotFoundException){
-            dd($e);
+            // dd($e);
         }
 
         return parent::render($request, $e);

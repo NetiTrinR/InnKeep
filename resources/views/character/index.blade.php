@@ -56,7 +56,7 @@
                 if($(searchId).val().length > 0){
                     var result = fuse.search($(searchId).val());
                     $(selector).hide();
-                    console.log(result.join(','));
+                    // console.log(result.join(','));
                     $(result.join(',')).show();
                 }else{
                     $(selector).show();
