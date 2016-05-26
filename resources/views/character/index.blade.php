@@ -21,9 +21,15 @@
                     </div>
                     <div id="list" class="list-group">
                         @foreach($characters as $key => $character)
-                            <a id="character-{{ $character->id }}" href="{{ route('character.show', $character->id) }}" class="list-group-item" data-name="{{ $character->name }}" data-campaign="{{ $character->campaign->name }}"><span>{{ $character->name }}, {{ $character->campaign->name }}</span></a>
+                            <a id="character-{{ $character->id }}"
+                                href="{{ route('character.show', $character->id) }}" class="list-group-item"
+                                data-name="{{ $character->name }}"
+                                data-campaign="{{ $character->campaign->name or 'No Campaign' }}"
+                                data-class="{{ $character->class or 'No Class' }}">
+                                <span>{{ $character->name }}{!! isset($character->campaign->name) ? ', ' . $character->campaign->name : '' !!}</span>
+                                <em class="pull-right">{{ $character->class or '' }}</em>
+                            </a>
                         @endforeach
-                        <a href="#" id="character-2" class="list-group-item" data-name="meep" data-campaign="rawr">meep, rawr</a>
                     </div>
                 </div>
             </div>
@@ -39,7 +45,7 @@
             var listItems = ".list-group-item";
             var selector = listId+">"+listItems;
             var searchId = "#search";
-            var keys = ["name", "campaign"];
+            var keys = ["name", "campaign", "class"];
             var list = $(selector).map(function(){
                 var output = $(this).data();
                 output.id = "#"+$(this).attr('id');
