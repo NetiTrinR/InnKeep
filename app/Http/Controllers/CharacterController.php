@@ -49,6 +49,7 @@ class CharacterController extends Controller
         $this->validate($request, ['name' => 'required', 'stats' => 'required|json']);
         $char = new Character($request->all());
         Auth::user()->characters()->save($char);
+        Session::flash('success', 'Character successfully created.');
         return redirect()->route('character.edit', $char->id);
     }
 
@@ -72,7 +73,7 @@ class CharacterController extends Controller
             $user->characters()->save($char);
             $template->characters()->save($char);
         });
-
+        Session::flash('success', 'Character successfully created via template. Please personalize your data.');
         return redirect()->route('character.edit', $char->id);
     }
 
