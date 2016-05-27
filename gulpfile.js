@@ -18,7 +18,8 @@ elixir(function(mix) {
     .styles([
         'bootstrap.css',
         'custom.css',
-        'bootstrap-panel-tabs.css'
+        'bootstrap-panel-tabs.css',
+        'awesome-bootstrap-checkbox.css'
     ], 'public/css/all.css', 'public/css/')
     .scripts([
         '../bootstrap/dist/js/bootstrap.js',

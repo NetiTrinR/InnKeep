@@ -1,5 +1,9 @@
 @extends('layouts._app')
 
+@section('header.styles')
+    <link rel="stylesheet" type="text/css" href="awesome-bootstrap-checkbox.css">
+@endsection
+
 @section('content')
     <div id="vue-container" class="row">
         <div class="col-md-10 col-md-offset-1">

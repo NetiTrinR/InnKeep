@@ -25,10 +25,11 @@
                                     <option value="{{ $template->id }}">{{ $template->name }}</option>
                                 @endforeach
                             </select>
+                            <p class="help-block">Contact Administration to request a new template.</p>
                         </div>
                         <div class="row">
-                            <div class="col-xs-11 text-right">
-                                <span class="text-right" style="line-height: 46px;">After submitting you will be redirected to the edit character page to set your values.</span>
+                            <div class="col-xs-11 text-right" style="line-height: 46px;">
+                                After submitting you will be redirected to the edit character page to set your values.
                             </div>
                             <div class="col-xs-1">
                                 <button type="submit" class="btn btn-success pull-right">Create</button>
